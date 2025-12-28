@@ -1,0 +1,1115 @@
+openapi: 3.0.3
+info:
+  title: Dawson POS API
+  version: 1.0.0
+  description: >
+    API para sistema de ventas, stock, caja, clientes, proveedores, compras, combos dinámicos,
+    con control estricto por roles (ADMIN / CAJERO), dinero en centavos (integer) y combos por coincidencia exacta.
+servers:
+  - url: /api/v1
+security:
+  - bearerAuth: []
+tags:
+  - name: Auth
+  - name: POS
+  - name: Clients
+  - name: CashSessions
+  - name: Products
+  - name: Combos
+paths:
+  /auth/login:
+    post:
+      tags: [Auth]
+      security: []
+      summary: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/LoginRequest" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/LoginResponse" }
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /auth/me:
+    get:
+      tags: [Auth]
+      summary: Usuario actual
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MeResponse" }
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /clients:
+    get:
+      tags: [Clients]
+      summary: Buscar/listar clientes (búsqueda por nombre)
+      parameters:
+        - in: query
+          name: search
+          schema: { type: string }
+          description: Búsqueda parcial por nombre
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PaginatedClients" }
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+    post:
+      tags: [Clients]
+      summary: Crear cliente (modal rápido POS)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CreateClientRequest" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Client" }
+        "409":
+          description: Teléfono duplicado
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PhoneAlreadyExistsError" }
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /clients/{clientId}:
+    get:
+      tags: [Clients]
+      summary: Obtener cliente
+      parameters:
+        - $ref: "#/components/parameters/ClientId"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Client" }
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+    patch:
+      tags: [Clients]
+      summary: Editar cliente
+      parameters:
+        - $ref: "#/components/parameters/ClientId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UpdateClientRequest" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Client" }
+        "409":
+          description: Teléfono duplicado
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PhoneAlreadyExistsError" }
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /pos/products:
+    get:
+      tags: [POS]
+      summary: Listar presentaciones activas para vender en POS (solo activo/inactivo manual)
+      description: >
+        Devuelve únicamente presentaciones activas (products.activo=true) y cuyo producto base esté activo.
+        No filtra por stock.
+      parameters:
+        - in: query
+          name: search
+          schema: { type: string }
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 200, default: 50 }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PosProductListResponse" }
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /pos/products/by-category:
+    get:
+      tags: [POS]
+      summary: Listar presentaciones activas por categoría (para selección en combos)
+      parameters:
+        - in: query
+          name: categoria
+          required: true
+          schema: { $ref: "#/components/schemas/Categoria" }
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 200, default: 100 }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PosProductsByCategoryResponse" }
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /pos/combos:
+    get:
+      tags: [POS]
+      summary: Listar combos activos para POS
+      parameters:
+        - in: query
+          name: search
+          schema: { type: string }
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PaginatedCombosPos" }
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /combos/{comboId}:
+    get:
+      tags: [Combos]
+      summary: Obtener combo (con componentes)
+      parameters:
+        - $ref: "#/components/parameters/ComboId"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ComboWithComponents" }
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /pos/sales/draft:
+    post:
+      tags: [POS]
+      summary: Crear venta en borrador (calcula totales)
+      description: >
+        Crea una venta DRAFT. Cliente obligatorio. Valida activos/inactivos.
+        No valida ni descuenta stock (eso ocurre al cobrar).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CreateDraftSaleRequest" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SaleView" }
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "422":
+          description: Regla de negocio (producto inactivo, etc.)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/BusinessRuleError" }
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /pos/sales/{saleId}/draft:
+    put:
+      tags: [POS]
+      summary: Actualizar venta borrador (recalcula)
+      parameters:
+        - $ref: "#/components/parameters/SaleId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UpdateDraftSaleRequest" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SaleView" }
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "422":
+          description: Regla de negocio (producto inactivo, etc.)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/BusinessRuleError" }
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /pos/sales/{saleId}:
+    get:
+      tags: [POS]
+      summary: Obtener venta (para reabrir/cobrar)
+      parameters:
+        - $ref: "#/components/parameters/SaleId"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SaleView" }
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /pos/sales/{saleId}/hold:
+    post:
+      tags: [POS]
+      summary: Guardar venta como PENDIENTE (sin stock / sin caja)
+      parameters:
+        - $ref: "#/components/parameters/SaleId"
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/HoldSaleRequest" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HoldSaleResponse" }
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "422":
+          description: Estado inválido
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/BusinessRuleError" }
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /pos/sales/{saleId}/pay:
+    post:
+      tags: [POS]
+      summary: Cobrar venta (PAGADA) - valida y descuenta stock
+      description: >
+        Requiere caja abierta (cashSessionId). Valida suma de pagos = total.
+        Valida stock suficiente en producto base y descuenta stock.
+        Permite que quien cobra sea distinto de quien creó (auditado).
+        Combos: coincidencia exacta (cantidadDescuento == cantidad del componente).
+      parameters:
+        - $ref: "#/components/parameters/SaleId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PaySaleRequest" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PaySaleResponse" }
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "409":
+          description: Conflicto (stock insuficiente)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/StockInsufficientError" }
+        "422":
+          description: Regla de negocio (sin caja, pagos no coinciden, selección combo inválida, producto inactivo)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/BusinessRuleError" }
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /cash-sessions/open:
+    post:
+      tags: [CashSessions]
+      summary: Abrir caja (turno)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/OpenCashSessionRequest" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CashSessionOpenedResponse" }
+        "422":
+          description: Caja ya abierta, etc.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/BusinessRuleError" }
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /cash-sessions/{cashSessionId}/close:
+    post:
+      tags: [CashSessions]
+      summary: Cerrar caja (cajero declara efectivo)
+      parameters:
+        - $ref: "#/components/parameters/CashSessionId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CloseCashSessionRequest" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CashSessionClosedResponse" }
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "422":
+          description: Estado inválido, etc.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/BusinessRuleError" }
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /products/{productId}:
+    patch:
+      tags: [Products]
+      summary: (ADMIN) Actualizar presentación (incluye activo/inactivo)
+      description: Solo ADMIN. Control manual de activo/inactivo.
+      parameters:
+        - $ref: "#/components/parameters/ProductId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UpdateProductRequest" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ProductAdminView" }
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /product-bases/{productBaseId}:
+    patch:
+      tags: [Products]
+      summary: (ADMIN) Actualizar producto base (incluye activo/inactivo)
+      parameters:
+        - $ref: "#/components/parameters/ProductBaseId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UpdateProductBaseRequest" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ProductBaseAdminView" }
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /product-bases:
+    get:
+      tags: [Products]
+      summary: (ADMIN) Listar productos base (con stock)
+      description: Solo ADMIN. Incluye stockActual y estado activo/inactivo.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ProductBaseListResponse" }
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+    post:
+      tags: [Products]
+      summary: (ADMIN) Crear producto base
+      description: Solo ADMIN.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CreateProductBaseRequest" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ProductBaseAdminView" }
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /products:
+    get:
+      tags: [Products]
+      summary: (ADMIN) Listar presentaciones
+      description: Solo ADMIN. Devuelve presentaciones aunque estén inactivas.
+      parameters:
+        - in: query
+          name: search
+          schema: { type: string }
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ProductListResponse" }
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+    post:
+      tags: [Products]
+      summary: (ADMIN) Crear presentación
+      description: Solo ADMIN.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CreateProductRequest" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ProductAdminView" }
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  /product-bases/{productBaseId}/stock-adjust:
+    post:
+      tags: [Products]
+      summary: (ADMIN) Ajustar stock de un producto base
+      description: >
+        Solo ADMIN. Permite sumar o restar stock (decimales).
+        Genera movimiento de stock (AJUSTE) y auditoría.
+      parameters:
+        - $ref: "#/components/parameters/ProductBaseId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/StockAdjustRequest" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ProductBaseAdminView" }
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+
+  /categories:
+    get:
+      tags: [Categories]
+      summary: (ADMIN) Listar categorías
+      parameters:
+        - in: query
+          name: includeInactive
+          schema: { type: boolean, default: false }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CategoryListResponse" }
+        "403": { $ref: "#/components/responses/ForbiddenError" }
+        "401": { $ref: "#/components/responses/UnauthorizedError" }
+    post:
+      tags: [Categories]
+      summary: (ADMIN) Crear categoría
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CreateCategoryRequest" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Category" }
+        "403": { $ref: "#/components/responses/ForbiddenError" }
+        "401": { $ref: "#/components/responses/UnauthorizedError" }
+  /categories/{categoryId}:
+    patch:
+      tags: [Categories]
+      summary: (ADMIN) Editar categoría
+      parameters:
+        - in: path
+          name: categoryId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UpdateCategoryRequest" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Category" }
+        "404": { $ref: "#/components/responses/NotFoundError" }
+        "403": { $ref: "#/components/responses/ForbiddenError" }
+        "401": { $ref: "#/components/responses/UnauthorizedError" }
+    delete:
+      tags: [Categories]
+      summary: (ADMIN) Eliminar categoría (soft/hard)
+      parameters:
+        - in: path
+          name: categoryId
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/DeleteResult" }
+        "404": { $ref: "#/components/responses/NotFoundError" }
+        "403": { $ref: "#/components/responses/ForbiddenError" }
+        "401": { $ref: "#/components/responses/UnauthorizedError" }
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    Page:
+      in: query
+      name: page
+      schema: { type: integer, minimum: 1, default: 1 }
+    PageSize:
+      in: query
+      name: pageSize
+      schema: { type: integer, minimum: 1, maximum: 200, default: 25 }
+    ClientId:
+      in: path
+      name: clientId
+      required: true
+      schema: { type: string }
+    SaleId:
+      in: path
+      name: saleId
+      required: true
+      schema: { type: string }
+    CashSessionId:
+      in: path
+      name: cashSessionId
+      required: true
+      schema: { type: string }
+    ComboId:
+      in: path
+      name: comboId
+      required: true
+      schema: { type: string }
+    ProductId:
+      in: path
+      name: productId
+      required: true
+      schema: { type: string }
+    ProductBaseId:
+      in: path
+      name: productBaseId
+      required: true
+      schema: { type: string }
+  responses:
+    UnauthorizedError:
+      description: No autenticado
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Error" }
+          example:
+            error: unauthorized
+            message: Token inválido o ausente
+    ForbiddenError:
+      description: Sin permisos (rol)
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Error" }
+          example:
+            error: forbidden
+            message: No tiene permisos para esta acción
+    NotFoundError:
+      description: No encontrado
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Error" }
+          example:
+            error: not_found
+            message: Recurso no encontrado
+    BadRequestError:
+      description: Error de validación de campos
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Error" }
+          example:
+            error: bad_request
+            message: Faltan campos obligatorios
+  schemas:
+
+    UnidadStock:
+      type: string
+      enum: [LITROS, KILOS, UNIDADES]
+    CreateProductBaseRequest:
+      type: object
+      required: [nombre, categoria, unidadStock]
+      properties:
+        nombre: { type: string, minLength: 1 }
+        categoria: { $ref: "#/components/schemas/Categoria" }
+        unidadStock: { $ref: "#/components/schemas/UnidadStock" }
+        stockMinimo: { type: number, default: 0 }
+        activo: { type: boolean, default: true }
+    CreateProductRequest:
+      type: object
+      required: [productBaseId, nombre, categoria, tipo, cantidadDescuento, precioVenta, activo]
+      properties:
+        productBaseId: { type: string }
+        nombre: { type: string, minLength: 1 }
+        categoria: { $ref: "#/components/schemas/Categoria" }
+        tipo: { $ref: "#/components/schemas/ProductoTipo" }
+        cantidadDescuento: { type: number }
+        precioVenta: { type: integer, description: Centavos }
+        activo: { type: boolean }
+    StockAdjustRequest:
+      type: object
+      required: [cantidad, motivo]
+      properties:
+        cantidad:
+          type: number
+          description: Puede ser positiva (sumar) o negativa (restar)
+        motivo:
+          type: string
+          minLength: 1
+    ProductBaseListItem:
+      allOf:
+        - $ref: "#/components/schemas/ProductBaseAdminView"
+    ProductBaseListResponse:
+      type: object
+      required: [items]
+      properties:
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/ProductBaseListItem" }
+    ProductListItem:
+      allOf:
+        - $ref: "#/components/schemas/ProductAdminView"
+    ProductListResponse:
+      type: object
+      required: [items, page, pageSize, total]
+      properties:
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/ProductListItem" }
+        page: { type: integer }
+        pageSize: { type: integer }
+        total: { type: integer }
+    Role:
+      type: string
+      enum: [ADMIN, CAJERO]
+    Categoria:
+      type: string
+      enum: [JABON_ROPA, SUAVIZANTE, DETERGENTE, LAVANDINA, DESODORANTE_PISO, OTRO]
+    ProductoTipo:
+      type: string
+      enum: [GRANEL, UNITARIO]
+    SaleStatus:
+      type: string
+      enum: [DRAFT, PENDIENTE, PAGADA, CANCELADA]
+    MedioPago:
+      type: string
+      enum: [EFECTIVO, TRANSFERENCIA, TARJETA]
+    LoginRequest:
+      type: object
+      required: [usuario, password]
+      properties:
+        usuario: { type: string }
+        password: { type: string }
+    LoginResponse:
+      type: object
+      required: [token, user]
+      properties:
+        token: { type: string }
+        user:
+          type: object
+          required: [id, nombre, rol]
+          properties:
+            id: { type: string }
+            nombre: { type: string }
+            rol: { $ref: "#/components/schemas/Role" }
+    MeResponse:
+      type: object
+      required: [id, nombre, rol]
+      properties:
+        id: { type: string }
+        nombre: { type: string }
+        rol: { $ref: "#/components/schemas/Role" }
+    Client:
+      type: object
+      required: [id, nombre, telefono, direccion]
+      properties:
+        id: { type: string }
+        nombre: { type: string }
+        telefono: { type: string }
+        direccion: { type: string }
+    CreateClientRequest:
+      type: object
+      required: [nombre, telefono, direccion]
+      properties:
+        nombre: { type: string, minLength: 1 }
+        telefono: { type: string, minLength: 3 }
+        direccion: { type: string, minLength: 1 }
+    UpdateClientRequest:
+      type: object
+      properties:
+        nombre: { type: string }
+        telefono: { type: string }
+        direccion: { type: string }
+    PaginatedClients:
+      type: object
+      required: [items, page, pageSize, total]
+      properties:
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/Client" }
+        page: { type: integer }
+        pageSize: { type: integer }
+        total: { type: integer }
+    PhoneAlreadyExistsError:
+      type: object
+      required: [error, message, existingClientId]
+      properties:
+        error: { type: string, enum: [phone_already_exists] }
+        message: { type: string }
+        existingClientId: { type: string }
+    PosProduct:
+      type: object
+      required: [productId, nombre, categoria, tipo, cantidadDescuento, precioVenta, activo, productBaseId]
+      properties:
+        productId: { type: string }
+        productBaseId: { type: string }
+        nombre: { type: string }
+        categoria: { $ref: "#/components/schemas/Categoria" }
+        tipo: { $ref: "#/components/schemas/ProductoTipo" }
+        cantidadDescuento: { type: number }
+        precioVenta: { type: integer, description: Centavos }
+        activo: { type: boolean }
+    PosProductListResponse:
+      type: object
+      required: [items]
+      properties:
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/PosProduct" }
+    PosProductsByCategoryResponse:
+      type: object
+      required: [categoria, items]
+      properties:
+        categoria: { $ref: "#/components/schemas/Categoria" }
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/PosProduct" }
+    ComboPos:
+      type: object
+      required: [comboId, nombre, precio, activo]
+      properties:
+        comboId: { type: string }
+        nombre: { type: string }
+        precio: { type: integer, description: Centavos }
+        activo: { type: boolean }
+    PaginatedCombosPos:
+      type: object
+      required: [items, page, pageSize, total]
+      properties:
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/ComboPos" }
+        page: { type: integer }
+        pageSize: { type: integer }
+        total: { type: integer }
+    ComboComponent:
+      type: object
+      required: [categoria, cantidad]
+      properties:
+        categoria: { $ref: "#/components/schemas/Categoria" }
+        cantidad: { type: number }
+    ComboWithComponents:
+      type: object
+      required: [comboId, nombre, precio, activo, componentes]
+      properties:
+        comboId: { type: string }
+        nombre: { type: string }
+        precio: { type: integer, description: Centavos }
+        activo: { type: boolean }
+        componentes:
+          type: array
+          items: { $ref: "#/components/schemas/ComboComponent" }
+    DraftItem:
+      type: object
+      required: [productId, qty]
+      properties:
+        productId: { type: string }
+        qty: { type: number }
+    ComboSelection:
+      type: object
+      required: [categoria, productId]
+      properties:
+        categoria: { $ref: "#/components/schemas/Categoria" }
+        productId: { type: string }
+    DraftComboItem:
+      type: object
+      required: [comboId, selections]
+      properties:
+        comboId: { type: string }
+        selections:
+          type: array
+          items: { $ref: "#/components/schemas/ComboSelection" }
+    CreateDraftSaleRequest:
+      type: object
+      required: [clienteId]
+      properties:
+        clienteId: { type: string }
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/DraftItem" }
+        comboItems:
+          type: array
+          items: { $ref: "#/components/schemas/DraftComboItem" }
+        nota: { type: string }
+    UpdateDraftSaleRequest:
+      allOf:
+        - $ref: "#/components/schemas/CreateDraftSaleRequest"
+    SaleClientMini:
+      type: object
+      required: [id, nombre, telefono]
+      properties:
+        id: { type: string }
+        nombre: { type: string }
+        telefono: { type: string }
+    SaleLineProduct:
+      type: object
+      required: [lineId, tipo, productId, nombre, qty, unitPrice, subtotal]
+      properties:
+        lineId: { type: string }
+        tipo: { type: string, enum: [PRODUCT] }
+        productId: { type: string }
+        nombre: { type: string }
+        qty: { type: number }
+        unitPrice: { type: integer, description: Centavos }
+        subtotal: { type: integer, description: Centavos }
+    SaleLineComboSelectionView:
+      type: object
+      required: [categoria, productId, cantidadDescuento]
+      properties:
+        categoria: { $ref: "#/components/schemas/Categoria" }
+        productId: { type: string }
+        cantidadDescuento: { type: number }
+    SaleLineCombo:
+      type: object
+      required: [lineId, tipo, comboId, nombre, qty, unitPrice, subtotal, selections]
+      properties:
+        lineId: { type: string }
+        tipo: { type: string, enum: [COMBO] }
+        comboId: { type: string }
+        nombre: { type: string }
+        qty: { type: number, default: 1 }
+        unitPrice: { type: integer, description: Centavos }
+        subtotal: { type: integer, description: Centavos }
+        selections:
+          type: array
+          items: { $ref: "#/components/schemas/SaleLineComboSelectionView" }
+    SaleTotals:
+      type: object
+      required: [subtotal, discount, total]
+      properties:
+        subtotal: { type: integer, description: Centavos }
+        discount: { type: integer, description: Centavos }
+        total: { type: integer, description: Centavos }
+    SaleView:
+      type: object
+      required: [saleId, estado, cliente, lines, totals, createdAt, createdByUserId]
+      properties:
+        saleId: { type: string }
+        estado: { $ref: "#/components/schemas/SaleStatus" }
+        cliente: { $ref: "#/components/schemas/SaleClientMini" }
+        lines:
+          type: array
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/SaleLineProduct"
+              - $ref: "#/components/schemas/SaleLineCombo"
+        totals: { $ref: "#/components/schemas/SaleTotals" }
+        nota: { type: string }
+        createdAt: { type: string, format: date-time }
+        heldAt: { type: string, format: date-time, nullable: true }
+        paidAt: { type: string, format: date-time, nullable: true }
+        createdByUserId: { type: string }
+        paidByUserId: { type: string, nullable: true }
+    HoldSaleRequest:
+      type: object
+      properties:
+        nota: { type: string }
+    HoldSaleResponse:
+      type: object
+      required: [saleId, estado, heldAt]
+      properties:
+        saleId: { type: string }
+        estado: { $ref: "#/components/schemas/SaleStatus" }
+        heldAt: { type: string, format: date-time }
+    PaymentInput:
+      type: object
+      required: [medio, amount]
+      properties:
+        medio: { $ref: "#/components/schemas/MedioPago" }
+        amount: { type: integer, description: Centavos }
+    PaySaleRequest:
+      type: object
+      required: [cashSessionId, payments]
+      properties:
+        cashSessionId: { type: string }
+        payments:
+          type: array
+          minItems: 1
+          items: { $ref: "#/components/schemas/PaymentInput" }
+        emitirFactura: { type: boolean, default: false }
+    PaySaleResponse:
+      type: object
+      required: [saleId, estado, paidAt, createdByUserId, paidByUserId, payments, totals]
+      properties:
+        saleId: { type: string }
+        estado: { $ref: "#/components/schemas/SaleStatus" }
+        paidAt: { type: string, format: date-time }
+        createdByUserId: { type: string }
+        paidByUserId: { type: string }
+        payments:
+          type: array
+          items: { $ref: "#/components/schemas/PaymentInput" }
+        totals: { $ref: "#/components/schemas/SaleTotals" }
+    OpenCashSessionRequest:
+      type: object
+      required: [montoInicial]
+      properties:
+        montoInicial: { type: integer, description: Centavos }
+    CashSessionOpenedResponse:
+      type: object
+      required: [cashSessionId, estado, fechaApertura]
+      properties:
+        cashSessionId: { type: string }
+        estado: { type: string, enum: [ABIERTA] }
+        fechaApertura: { type: string, format: date-time }
+    CloseCashSessionRequest:
+      type: object
+      required: [montoDeclarado]
+      properties:
+        montoDeclarado: { type: integer, description: Centavos }
+        observaciones: { type: string }
+    CashSessionClosedResponse:
+      type: object
+      required: [cashSessionId, estado, fechaCierre]
+      properties:
+        cashSessionId: { type: string }
+        estado: { type: string, enum: [CERRADA] }
+        fechaCierre: { type: string, format: date-time }
+    UpdateProductRequest:
+      type: object
+      properties:
+        nombre: { type: string }
+        precioVenta: { type: integer, description: Centavos }
+        activo: { type: boolean }
+    ProductAdminView:
+      type: object
+      required: [productId, productBaseId, nombre, categoria, tipo, cantidadDescuento, precioVenta, activo]
+      properties:
+        productId: { type: string }
+        productBaseId: { type: string }
+        nombre: { type: string }
+        categoria: { $ref: "#/components/schemas/Categoria" }
+        tipo: { $ref: "#/components/schemas/ProductoTipo" }
+        cantidadDescuento: { type: number }
+        precioVenta: { type: integer, description: Centavos }
+        activo: { type: boolean }
+    UpdateProductBaseRequest:
+      type: object
+      properties:
+        nombre: { type: string }
+        categoria: { $ref: "#/components/schemas/Categoria" }
+        stockMinimo: { type: number }
+        activo: { type: boolean }
+    ProductBaseAdminView:
+      type: object
+      required: [productBaseId, nombre, categoria, unidadStock, stockActual, stockMinimo, activo]
+      properties:
+        productBaseId: { type: string }
+        nombre: { type: string }
+        categoria: { $ref: "#/components/schemas/Categoria" }
+        unidadStock: { type: string, enum: [LITROS, KILOS, UNIDADES] }
+        stockActual: { type: number }
+        stockMinimo: { type: number }
+        activo: { type: boolean }
+    Error:
+      type: object
+      required: [error, message]
+      properties:
+        error: { type: string }
+        message: { type: string }
+    BusinessRuleError:
+      type: object
+      required: [error, message]
+      properties:
+        error:
+          type: string
+          enum: [client_required, product_inactive, cash_session_required, payments_mismatch, sale_state_invalid, combo_selection_invalid, cash_session_state_invalid]
+        message: { type: string }
+        details: { type: object, additionalProperties: true }
+    StockInsufficientDetail:
+      type: object
+      required: [productBaseId, required, available]
+      properties:
+        productBaseId: { type: string }
+        required: { type: number }
+        available: { type: number }
+    StockInsufficientError:
+      type: object
+      required: [error, message, details]
+      properties:
+        error: { type: string, enum: [stock_insufficient] }
+        message: { type: string }
+        details:
+          type: array
+          items: { $ref: "#/components/schemas/StockInsufficientDetail" }

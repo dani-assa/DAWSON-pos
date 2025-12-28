@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: dawson
+      POSTGRES_USER: dawson
+      POSTGRES_PASSWORD: dawson
+    ports:
+      - "5432:5432"
+    volumes:
+      - dawson_db:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+
+  api:
+    build: ./api
+    environment:
+      PORT: "3000"
+      DATABASE_URL: "postgres://dawson:dawson@db:5432/dawson"
+      JWT_SECRET: "change-me-in-prod"
+      NODE_ENV: "development"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    volumes:
+      - ./import:/import
+
+  admin-web:
+    build:
+      context: ./admin-web
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:3000/api/v1
+    depends_on:
+      - api
+
+volumes:
+  dawson_db:
