@@ -1,371 +1,371 @@
-﻿#;Código;Grupo de productos;Producto;Cant.;UM;;;;;
-1;275;(none);Estacion de Cebado (cucarachicida);0;Unidad;;;;;
-2;367;(none);Tableta mata mosquitos FUYI x24;0;Unidad;;;;;
-3;222;Auto;COMBO AUTO (5lts shampoo + 500ml silicona + 500ml caucho);97;Unidad;;;;;
-4;286;Auto;Caucho base gel Auto;2,5;Litro;;;;;
-5;200;Auto;Caucho premium Auto;0;Litro;;;;;
-6;220;Auto;Esponja Lava auto;4;Unidad;;;;;
-7;358;Auto;Lava llantas profesional;2;Unidad;;;;;
-8;273;Auto;Limpia llantas;9;Litro;;;;;
-9;272;Auto;Limpia tapizado;0;Litro;;;;;
-10;249;Auto;Paño microfibra 30x30cm;0;Unidad;;;;;
-11;271;Auto;Quita bichos (autos);0;Litros;;;;;
-12;255;Auto;Rejilla MAKE Auto 50x55;1;Unidad;;;;;
-13;199;Auto;Shampoo ciliconado Auto;928;Litro;;;;;
-14;287;Auto;Silicona Gel Perfumada Auto;4;Litro;;;;;
-15;214;Auto;Silicona Premium;6;Litro;;;;;
-16;;Baño;Bloque adherente inodoro PATO;0;Unidad;;;;;
-17;;Baño;CIF Baño Expert Gatillo 500 ml;10;Unidad;;;;;
-18;;Baño;CIF Baño Expert Repuesto 450 ml;6;Unidad;;;;;
-19;;Baño;Canasta inodoro repuesto;0;Unidad;;;;;
-20;298;Baño;Cepillo lava espalda;0;Unidad;;;;;
-21;335;Baño;Escobilla baño con base;1;Unidad;;;;;
-22;24;Baño;Escobilla de baño con recipiente;0;Unidad;;;;;
-23;;Baño;Limpia inodoros HARPIC 500 ml;-2;Unidad;;;;;
-24;248;Baño;Papel HIGIENOL 4x30mts;0;Unidad;;;;;
-25;301;Baño;Papel Higienico ELEGANTE 6x30mts;4;Unidad;;;;;
-26;342;Baño;Papel Higienico HIGIENOL 4x50mt;0;Unidad;;;;;
-27;302;Baño;Papel Higienico HIGIENOL 4x80 mts;0;Unidad;;;;;
-28;318;Baño;Papel Higienico M&K 4x80 mts ;0;Unidad;;;;;
-29;126;Baño;Papel higienico 4x30mts;0;Unidad;;;;;
-30;121;Baño;Papel higienico individual x50 mts;0;Unidad;;;;;
-31;120;Baño;Papel higienico individual x80 mts;0;Unidad;;;;;
-32;122;Baño;Papel higienico x10u (300 mts);0;Unidad;;;;;
-33;123;Baño;Papel higienico x10u (500 mts);0;Unidad;;;;;
-34;124;Baño;Papel higienico x10u (700 mts);0;Unidad;;;;;
-35;125;Baño;Papel higienico x10u (900 mts);0;Unidad;;;;;
-36;306;Baño;Papel higiénico ARO 12x30mts D/H;0;Unidad;;;;;
-37;305;Baño;Papel higiénico ARO 18x30mts S/H;3;Unidad;;;;;
-38;294;Baño;Papel higiénico CARREFOUR 18x30mts;0;Unidad;;;;;
-39;;Baño;Pastilla inodoro para mochila  MR GOLD 50gr;0;Unidad;;;;;
-40;329;Baño;Pastillas inodoro HARPIC 20gr;12;Unidad;;;;;
-41;188;Baño;Pastillas inodoro JARDIN 25gr;0;Unidad;;;;;
-42;129;Cocina;Desengrasante Mr Musc (Naranja);19;Litro;;;;;
-43;142;Cocina;Detergente 15% (verde);0;Litro;;;;;
-44;143;Cocina;Detergente 20% (Verde);100;Litro;;;;;
-45;;Cocina;Detergente ALA concentrado 500 ml;5;Unidad;;;;;
-46;;Cocina;Detergente CIF 300 ml;6;Unidad;;;;;
-47;;Cocina;Detergente CIF 500 ml;6;Unidad;;;;;
-48;;Cocina;Detergente CIF Repuesto 450 ml;4;Unidad;;;;;
-49;;Cocina;Detergente MAGISTRAL 300 ml;0;Unidad;;;;;
-50;;Cocina;Detergente MAGISTRAL 500 ml;2;Unidad;;;;;
-51;264;Cocina;Detergente Magistral Limón;24;Litro;;;;;
-52;146;Cocina;Escurridor platos;0;Unidad;;;;;
-53;219;Cocina;Esponja Extralimp Antihaderente;10;Unidad;;;;;
-54;140;Cocina;Esponja MAKE grande;1;Unidad;;;;;
-55;332;Cocina;Esponja acero MAKE 15gr;25;Unidad;;;;;
-56;18;Cocina;Esponja acero chica 10gr;0;Unidad;;;;;
-57;19;Cocina;Esponja acero mediana 15gr;10;Unidad;;;;;
-58;331;Cocina;Esponja antihaderente MAKE;19;Unidad;;;;;
-59;139;Cocina;Esponja con fibra MAKE;22;Unidad;;;;;
-60;23;Cocina;Esponja fibra ok;2;Unidad;;;;;
-61;17;Cocina;Esponja salvauña ok;-1;Unidad;;;;;
-62;21;Cocina;Guantes latex MAKE;4;Unidad;;;;;
-63;117;Cocina;Hiper rollo cocina x3 (360 paños);0;Unidad;;;;;
-64;119;Cocina;Hiper rollo cocina x8;1;Unidad;;;;;
-65;116;Cocina;Maxi rollo cocina 200 paños;0;Unidad;;;;;
-66;118;Cocina;Maxi rollo cocina x 8;0;Unidad;;;;;
-67;33;Cocina;Rejilla algodón doble 37x30cm;0;Unidad;;;;;
-68;32;Cocina;Rejilla amarillo multiuso 38x36cm;14;Unidad;;;;;
-69;12;Cocina;Rejilla pabilo doble NUVIA;2;Unidad;;;;;
-70;258;Cocina;Repasador estampado;5;Unidad;;;;;
-71;259;Cocina;Repasador x2;0;Unidad;;;;;
-72;344;Cocina;Rollo cocina ELEGANTE 200 paños;5;Unidad;;;;;
-73;366;Cocina;Rollo cocina ELEGANTE 3x100 ;5;Unidad;;;;;
-74;303;Cocina;Rollo cocina ELEGANTE 3x50 paños;0;Unidad;;;;;
-75;;Cocina;Rollo cocina ELEGANTE x 360 paños;3;Unidad;;;;;
-76;;Cocina;Rollo cocina SUSSEX 200 paños;0;Unidad;;;;;
-77;353;Cocina;Rollo cocina SUSSEX 3x50 ;2;Unidad;;;;;
-78;;Cocina;Rollo de cocina ELEGANTE 3x60 ;1;Unidad;;;;;
-79;343;Cocina;Servilleta clasica SUSSEX 80 un;3;Unidad;;;;;
-80;224;Combo;COMBO BAÑO (5lts lavand + 1lt lav gel + 1lt CIF crema + 1 past inodoro);97;Unidad;;;;;
-81;223;Combo;COMBO COCINA (5lts det 20% + 1lt deseng + 1 rejilla);99;Unidad;;;;;
-82;221;Combo;COMBO ROPA (5lts jabon + 1lt lav RP o RC + 1lt Quitam);81;unidad;;;;;
-83;6;Combo;Combo 1 (Jabon 5lt + Suavizante 5lt);9950;Unidad;;;;;
-84;145;Combo;Combo 3 (Deter 20% + Lavand + Des. Piso);34;unidad;;;;;
-85;245;Descartables;Bandeja Pet Bisagra 142;0;Unidad;;;;;
-86;231;Descartables;Bandeja plastica 103 x5 un;20;Unidad;;;;;
-87;247;Descartables;Bandeja plastica 105 x 5un;20;Unidad;;;;;
-88;246;Descartables;Bandeja rectangular plata N1 14x19cm;0;Unidad;;;;;
-89;241;Descartables;Cuchara plastico plateada x 20 un;0;Unidad;;;;;
-90;234;Descartables;Cuchara platico blanca x 10 un;0;Unidad;;;;;
-91;235;Descartables;Cuchara platico blanca x 50 un;0;Unidad;;;;;
-92;236;Descartables;Cuchara platico sopera x 10 un;20;Unidad;;;;;
-93;237;Descartables;Cuchara platico sopera x25 un;0;Unidad;;;;;
-94;240;Descartables;Cuchillo Plastico cristal x25 un;0;Unidad;;;;;
-95;233;Descartables;Plato plastico 17cm blanco x 50 un;0;Unidad;;;;;
-96;232;Descartables;Plato plastico 17cm blanco x10 un;0;Unidad;;;;;
-97;243;Descartables;Servilleta Tissue Rojo 24x24cm x25 un;2;Unidad;;;;;
-98;244;Descartables;Servilleta Tissue Verde 24x24cm x25un;2;Unidad;;;;;
-99;242;Descartables;Servilleta de papel ELEGANTE 30x30cm x 20un;0;Unidad;;;;;
-100;239;Descartables;Tenedor plastico blanco x 50 un;0;Unidad;;;;;
-101;238;Descartables;Tenedor plastico blanco x10 un;0;Unidad;;;;;
-102;230;Descartables;Vaso platico descartable 300cc x10 un;20;Unidad;;;;;
-103;229;Descartables;Vaso platico descartable 500cc x 10 un;0;Unidad;;;;;
-104;135;Escobas;Barrendero mediano calle (Escobillon);2;Unidad;;;;;
-105;R719;Escobas;Cabo madera 120 cm;-1;Unidad;;;;;
-106;R768;Escobas;Cabo madera 130 cm;2;Unidad;;;;;
-107;328;Escobas;Cabo madera 180 cm;5;Unidad;;;;;
-108;256;Escobas;Escoba Americana ERPEN (chica) c/cabo;5;Unidad;;;;;
-109;330;Escobas;Escoba ERPEN c/cabo ;0;Unidad;;;;;
-110;257;Escobas;Escoba Recta ERPEN c/cabo;0;Unidad;;;;;
-111;295;Escobas;Escoba de paja;0;Unidad;;;;;
-112;137;Escobas;Escoba exterior;4;Unidad;;;;;
-113;10;Escobas;Escoba moderna;0;Unidad;;;;;
-114;36;Escobas;Escobillon Ambar 8.5cm;0;Unidad;;;;;
-115;35;Escobas;Escobillon Coral 10cm;0;Unidad;;;;;
-116;9;Escobas;Escobillon Palermo;0;Unidad;;;;;
-117;360;Escobas;Escobillon Pucara MAPUCHE c/cabo ;6;Unidad;;;;;
-118;148;Extras;Bidon;858;Unidad;;;;;
-119;127;Extras;Envio;959;;;;;;
-120;133;Extras;Extra;100;;;;;;
-121;263;Hogar;Aceite Ambar;5;Unidad;;;;;
-122;289;Hogar;Alcohol FRAU 96% 4.5 Lts;2,2;Unidad;;;;;
-123;207;Hogar;Algodón DONCELLA 70gr;1;Unidad;;;;;
-124;212;Hogar;Amonio cuaternario;0;Unidad;;;;;
-125;265;Hogar;Apresto Plancha Fácil;10;Litro;;;;;
-126;22;Hogar;Aromatizante;0;Unidad;;;;;
-127;170;Hogar;Ayudin desinfectante 332 cc;0;Unidad;;;;;
-128;;Hogar;BAYGON aerosol Mata Cucaracha y araña;1;Unidad;;;;;
-129;253;Hogar;Balde 10Lts MAKE Negro;0;Unidad;;;;;
-130;R513;Hogar;Balde 10lts;0;Unidad;;;;;
-131;160;Hogar;Balde 11 lts;1;Unidad;;;;;
-132;346;Hogar;Balde 13 Lts ;8;Unidad;;;;;
-133;254;Hogar;Balde 13Lts con escurridor;1;Unidad;;;;;
-134;;Hogar;Balde Mopa trapeador 360°;3;Unidad;;;;;
-135;31;Hogar;Balde de residuo tapa plana 12lts;0;Unidad;;;;;
-136;30;Hogar;Balde de residuo vaiven 8lts;2;Unidad;;;;;
-137;167;Hogar;Barre Hoja;0;Unidad;;;;;
-138;348;Hogar;Barre hojas HARAGAN;0;Unidad;;;;;
-139;159;Hogar;Bicarbonato de sodio x 100gr;5;Unidad;;;;;
-140;169;Hogar;Blem Lustramueble 360 cc;7;Unidad;;;;;
-141;;Hogar;Botellon vidrio 1900 cc;3;Unidad;;;;;
-142;27;Hogar;Broche plastico x12;3;Unidad;;;;;
-143;211;Hogar;CIF bio crema 375gr;1;Unidad;;;;;
-144;180;Hogar;CIF ultra brillo Lavanda;0;Unidad;;;;;
-145;163;Hogar;Cabo madera 150 cm;5;Unidad;;;;;
-146;314;Hogar;Cabo metalico 120 cm;2;Unidad;;;;;
-147;42;Hogar;Cabo sopapa madera;0;Unidad;;;;;
-148;;Hogar;Canasta cuerina para mate;0;Unidad;;;;;
-149;R110;Hogar;Canasto ropa corazon;0;Unidad;;;;;
-150;136;Hogar;Cepillo Planchita gde;1;Unidad;;;;;
-151;356;Hogar;Cepillo a vapor quita pelos;11;Unidad;;;;;
-152;165;Hogar;Cepillo lava zapatilla;2;Unidad;;;;;
-153;164;Hogar;Cepillo p/uña;2;Unidad;;;;;
-154;268;Hogar;Cepillo para piso duro;1;Unidad;;;;;
-155;349;Hogar;Cepillo para zapatos MAKE;1;Unidad;;;;;
-156;195;Hogar;Cera Roja;14;Litro;;;;;
-157;130;Hogar;Cera incolora;68;Litro;;;;;
-158;304;Hogar;Cesto basura con pedal ;1;Unidad;;;;;
-159;115;Hogar;Cif crema;38;Litro;;;;;
-160;158;Hogar;Citronela para ambiente concentrado;5;Unidad;;;;;
-161;7;Hogar;Combo 2 (Detergente 10% 5lt + Lavandina 5lt + Desodorante 5lt);4;Unidad;;;;;
-162;R1286;Hogar;Combo trapeador plus;0;Unidad;;;;;
-163;197;Hogar;Crema de enjuague;20;Litro;;;;;
-164;113;Hogar;Creolina base Gasoil;12,7;Litro;;;;;
-165;213;Hogar;Desengrasante Industrial;94;Unidad;;;;;
-166;216;Hogar;Desengrasante gel;9;Litro;;;;;
-167;128;Hogar;Desincrustante/quitasarro (Acido);55;Litro;;;;;
-168;208;Hogar;Desinfectante CIF 280gr;4;Unidad;;;;;
-169;209;Hogar;Desodorante REXONA hombre 150ml;0;Unidad;;;;;
-170;210;Hogar;Desodorante REXONA mujer 150ml;0;Unidad;;;;;
-171;270;Hogar;Desodorante ambiente POET;0;Unidad;;;;;
-172;5;Hogar;Desodorante de piso LAVANDA;65;Litro;;;;;
-173;326;Hogar;Desodorante piso CHICLE;-5;Litro ;;;;;
-174;323;Hogar;Desodorante piso CITRONELLA;50;Litro ;;;;;
-175;327;Hogar;Desodorante piso COLONIA;30;Litro ;;;;;
-176;324;Hogar;Desodorante piso LYSOFORM;50;Litro ;;;;;
-177;322;Hogar;Desodorante piso MARINO;13;Litro ;;;;;
-178;325;Hogar;Desodorante piso PINO;34;Litro ;;;;;
-179;177;Hogar;Destapa cañerias x 500ml;0;Unidad;;;;;
-180;288;Hogar;Destapacañeria PLOMERO LIQUIDO 1Lt;1;Unidad;;;;;
-181;3;Hogar;Detergente 10% (amarillo);882,5;Litro;;;;;
-182;;Hogar;Dispenser detergente 600cc;5;Unidad;;;;;
-183;266;Hogar;Echo en balde;36;Litro;;;;;
-184;;Hogar;Envase con valvula 250 ml;18;Unidad;;;;;
-185;;Hogar;Envase con valvula 500 ml;7;Unidad;;;;;
-186;311;Hogar;Escoba Cuyen MAPUCHE c/cabo;3;Unidad;;;;;
-187;29;Hogar;Escurridor para balde sina (repuesto azul);8;Unidad;;;;;
-188;179;Hogar;Espiral X5;37;Unidad;;;;;
-189;365;Hogar;Espirales Mosquitos Country RAID (Morado) ;3;Unidad;;;;;
-190;205;Hogar;Esponja de acero DEA;0;Unidad;;;;;
-191;278;Hogar;Filtro Resumidero GELTEK 12x12;0;Unidad;;;;;
-192;279;Hogar;Filtro Resumidero GELTEK 15x15;0;Unidad;;;;;
-193;13;Hogar;Franela MAKE;15;Unidad;;;;;
-194;161;Hogar;Fuenton x 20lts;0;Unidad;;;;;
-195;134;Hogar;Fuenton x 30lts;0;Unidad;;;;;
-196;R235;Hogar;Guante de trabajo;0;Unidad;;;;;
-197;4;Hogar;Hipoclorito 10%;1657;Litro;;;;;
-198;319;Hogar;Jabon Liquido Tipo Ariel ;25;Litro ;;;;;
-199;183;Hogar;Jabon Pan ALA 200 gr;13;Unidad;;;;;
-200;184;Hogar;Jabon Pan ARGENTINO 2x200gr;0;Unidad;;;;;
-201;290;Hogar;Jabon Pan GIGANTE 150 gr;0;Unidad;;;;;
-202;308;Hogar;Jabon Pan SEISEME 300gr;0;Unidad;;;;;
-203;202;Hogar;Jabon en polvo ALA mano c/bicarb;8;Unidad;;;;;
-204;203;Hogar;Jabon en polvo ALA matic c/bicarb;5;Unidad;;;;;
-205;320;Hogar;Jabon liquido Tipo Ala ;50;Litro ;;;;;
-206;1;Hogar;Jabon liquido Tipo Skip ;699,8;Litro;;;;;
-207;131;Hogar;Jabon liquido p/manos;36;Litro;;;;;
-208;307;Hogar;Jabon pan ARGENTINO 150gr;1;Unidad;;;;;
-209;299;Hogar;Jabon pan ZORRO;0;Unidad;;;;;
-210;186;Hogar;Jabon tocador LUX 125gr;0;Unidad;;;;;
-211;187;Hogar;Jabon tocador REXONA 125gr;0;Unidad;;;;;
-212;185;Hogar;Jabon tocador ST TROPEZ 125gr;0;Unidad;;;;;
-213;274;Hogar;Jeringa Cucarachicida 6gr;0;Unidad;;;;;
-214;276;Hogar;Jeringa Hormiguicida 6gr;4;Unidad;;;;;
-215;44;Hogar;Lampazo mediano (cera);6;Unidad;;;;;
-216;8;Hogar;Lavandina;862;Litro;;;;;
-217;150;Hogar;Lavandina Ropa Blanca;107;Litro;;;;;
-218;149;Hogar;Lavandina Ropa Color;13;Litro;;;;;
-219;151;Hogar;Lavandina en Gel;27;Litro;;;;;
-220;250;Hogar;Limpia techo bochita;0;Unidad;;;;;
-221;359;Hogar;Limpia vidrio Extensible ;2;Unidad;;;;;
-222;361;Hogar;Limpia vidrio eco 30 cm ;1;Unidad;;;;;
-223;;Hogar;Limpiador polvo ODEX 400 g;10;Unidad;;;;;
-224;132;Hogar;Limpiavidrio (liquido) ;124,5;Litro;;;;;
-225;166;Hogar;Limpiavidrio 30cm;0;Unidad;;;;;
-226;198;Hogar;Liquido lampazo;9;Litro;;;;;
-227;296;Hogar;Lustramueble CERAMICOL 360 cm3;0;Unidad;;;;;
-228;297;Hogar;Lustramueble CIF Ultra Brillo repuesto 380 ml;2;Unidad;;;;;
-229;;Hogar;Luz mate;1;Unidad;;;;;
-230;171;Hogar;Lysoform desinfectante 285 cm3;0;Unidad;;;;;
-231;292;Hogar;Lysoform desinfectante 360cc;6;Unidad;;;;;
-232;;Hogar;Mate Camionero algarrobo;2;Unidad;;;;;
-233;;Hogar;Mate imperial Acero termico;0;Unidad;;;;;
-234;;Hogar;Mate imperial Calabaza;0;Unidad;;;;;
-235;;Hogar;Mate imperial liso;2;Unidad;;;;;
-236;285;Hogar;Mopa 100cm;1;Unidad;;;;;
-237;281;Hogar;Mopa 30cm;0;Unidad;;;;;
-238;282;Hogar;Mopa 40cm;0;Unidad;;;;;
-239;283;Hogar;Mopa 60cm;0;Unidad;;;;;
-240;284;Hogar;Mopa 80cm;1;Unidad;;;;;
-241;26;Hogar;Mopa algodon MAKE ;6;Unidad;;;;;
-242;313;Hogar;Mopa algodon NUVIA ;0;Unidad;;;;;
-243;312;Hogar;Mopa micro fibra MAKE;3;Unidad;;;;;
-244;28;Hogar;Pack 10 bolsas - 45x60cm;0;Unidad;;;;;
-245;14;Hogar;Pack 10 bolsas - 50x70cm;0;Unidad;;;;;
-246;15;Hogar;Pack 10 bolsas - 60x90cm;24;Unidad;;;;;
-247;16;Hogar;Pack 10 bolsas - 80x110cm;16;Unidad;;;;;
-248;375;Hogar;Pack 20 bolsa 45x60 ;28;Unidad;;;;;
-249;374;Hogar;Pack 20 bolsas 50x70 ;19;Unidad;;;;;
-250;178;Hogar;Pack 30 bolsas - 45x60 cm;0;Unidad;;;;;
-251;347;Hogar;Pala c/ cabo NUVIA;1;Unidad;;;;;
-252;334;Hogar;Pala c/cabo EURO con goma ;0;Unidad;;;;;
-253;138;Hogar;Pala c/cabo Premium;0;Unidad;;;;;
-254;341;Hogar;Pala c/cabo sin goma EURO;2;Unidad;;;;;
-255;43;Hogar;Pala plastico;3;Unidad;;;;;
-256;20;Hogar;Pala punta de goma;5;Unidad;;;;;
-257;368;Hogar;Papel Higienico ELEGANTE 4x30mts ;6;Unidad;;;;;
-258;;Hogar;Papel Higienico ELEGANTE 4x80mts;2;Unidad;;;;;
-259;;Hogar;Papel higienico ELITE Doble Hoja 4x50mts;0;Unidad;;;;;
-260;172;Hogar;Pasta dental Oral-B Extra Blanco 150gr;0;Unidad;;;;;
-261;293;Hogar;Pastilla inodoro GLADE Lavanda;0;Unidad;;;;;
-262;371;Hogar;Pastillas Cloro 50gr c/u ;30;Unidad;;;;;
-263;355;Hogar;Pastillas Mata mosquitos RAID;0;Unidad;;;;;
-264;350;Hogar;Paño microfibra (pack x 3) ;7;Unidad;;;;;
-265;309;Hogar;Pañuelos descartables ELEGANTE ;1;Unidad;;;;;
-266;144;Hogar;Perfumina;1;Litro;;;;;
-267;251;Hogar;Perfumina MASPLUS;0;Unidad;;;;;
-268;162;Hogar;Plumero de lana;1;Unidad;;;;;
-269;337;Hogar;Plumero de microfibra;5;Unidad;;;;;
-270;R1046;Hogar;Plumero nro 1;0;Unidad;;;;;
-271;25;Hogar;Plumero poliester 20gr;0;Unidad;;;;;
-272;;Hogar;Porta mate cuerina;2;Unidad;;;;;
-273;;Hogar;Pulverizador 250 ml;14;Unidad;;;;;
-274;;Hogar;Pulverizador 500 ml;6;Unidad;;;;;
-275;141;Hogar;Pulverizador x 750ml Make;9;Unidad;;;;;
-276;114;Hogar;Quitamanchas (Trenet);3,5;Litro;;;;;
-277;277;Hogar;Raticida x10;0;Unidad;;;;;
-278;269;Hogar;Rejillla Americana 42x38cm;0;Unidad;;;;;
-279;168;Hogar;Repelente Citronella x250ml;5;Unidad;;;;;
-280;;Hogar;Repelente para mosquitos AKTIOL 143ml/90g;10;Unidad;;;;;
-281;226;Hogar;Rollo Film 5mts;1;Unidad;;;;;
-282;227;Hogar;Rollo Papel Aluminio 5mts;0;Unidad;;;;;
-283;228;Hogar;Rollo Papel Manteca 15mts;1;Unidad;;;;;
-284;193;Hogar;SUIZA Autobrillo 400 ml;2;Unidad;;;;;
-285;156;Hogar;Sahumerio x 15 un;1;Unidad;;;;;
-286;262;Hogar;Sahumerio x 20 un;0;Unidad;;;;;
-287;260;Hogar;Saphirus Aceite;1;Unidad;;;;;
-288;261;Hogar;Saphirus Aerosol Aromatizante;2;Unidad;;;;;
-289;154;Hogar;Saphirus Difusor;4;Unidad;;;;;
-290;152;Hogar;Saphirus Home Spray 500 ml;0;Unidad;;;;;
-291;153;Hogar;Saphirus Textil 250 ml;11;Unidad;;;;;
-292;155;Hogar;Saphirus mini 60ml;0;Unidad;;;;;
-293;300;Hogar;Shampoo Pulguicida;3,5;;;;;;
-294;196;Hogar;Shampoo pelo;8;Litro;;;;;
-295;41;Hogar;Sopapa goma negra;7;Unidad;;;;;
-296;321;Hogar;Suavizante Tipo Comfort ;310,5;Litro ;;;;;
-297;2;Hogar;Suavizante Tipo Vivere;422;Litro;;;;;
-298;;Hogar;Tabla chica con pala;0;Unidad;;;;;
-299;;Hogar;Tabla grande con pala;1;Unidad;;;;;
-300;206;Hogar;Talco EFFICIENT 100gr;0;Unidad;;;;;
-301;;Hogar;Termo media manija;1;Unidad;;;;;
-302;192;Hogar;Trapo de pido LA PONDEROSA;0;Unidad;;;;;
-303;34;Hogar;Trapo de piso  FIBRAN Clean;7;Unidad;;;;;
-304;351;Hogar;Trapo de piso LA PONDEROSA Clasico ;8;Unidad;;;;;
-305;191;Hogar;Trapo de piso LA PONDEROSA compacto;0;Unidad;;;;;
-306;190;Hogar;Trapo de piso MEDIA NARANJA;0;Unidad;;;;;
-307;352;Hogar;Trapo de piso MEDIA NARANJA Ref G;9;Unidad;;;;;
-308;189;Hogar;Trapo de piso MEDIA NARANJA compacto G;0;Unidad;;;;;
-309;345;Hogar;Trapo de piso Rayado FIBRAN;6;Unidad;;;;;
-310;R336;Hogar;Trapo de piso amarillo;0;Unidad;;;;;
-311;11;Hogar;Trapo de piso consorcio gris;0;Unidad;;;;;
-312;362;Hogar;Trapo de piso microfibra;7;Unidad;;;;;
-313;112;Hogar;Trapo soft sina blanco;6;Unidad;;;;;
-314;252;Hogar;Veneno Cipermetrina;13;Litro;;;;;
-315;225;Hogar;Vinagre de alcohol;0;Unidad;;;;;
-316;204;Hogar;Virulana DEA;0;Unidad;;;;;
-317;333;Hogar;Virulana de acero NUVIA;3;Unidad;;;;;
-318;310;Hogar;Yerba CHAMIGO 1 kg;4;Unidad;;;;;
-319;;Hogar;Yerbero y azucarero;3;Unidad;;;;;
-320;267;Pileta;Alguicida;17;Litro;;;;;
-321;338;Pileta;Alguicida WATER DAY;5;Litro;;;;;
-322;173;Pileta;Boya dosificadora para pileta;0;Unidad;;;;;
-323;340;Pileta;Boya pileta ;0;Unidad;;;;;
-324;215;Pileta;Clarificante;14;Litro;;;;;
-325;339;Pileta;Clarificante WATER DAY;5;Litro ;;;;;
-326;176;Pileta;Cloro granulado 1kg;5;kilos;;;;;
-327;147;Pileta;Cloro liquido (pileta);135;Litro;;;;;
-328;157;Pileta;H2O Plus Pileta;0;Unidad;;;;;
-329;175;Pileta;Pastillas cloro triple accion 200 gr;10;Unidad;;;;;
-330;174;Pileta;Saca hojas para pileta;1;Unidad;;;;;
-331;194;Pileta;Sulfato de Aluminio;18,5;Kilo;;;;;
-332;;Profesional;Papel Higienico Blanco 8x300 mts cod. 300;0;Unidad;;;;;
-333;;Profesional;Papel Higienico Blanco 8x300 mts cod. 306;0;Unidad;;;;;
-334;;Profesional;Papel Higienico SAUCO 8x300mts cod.304;0;Unidad;;;;;
-335;315;Profesional;Servilleta Alumax 18x18 cm;10;Caja;;;;;
-336;;Profesional;Toalla intercadada SAUCO Beige cod. 1101;0;Unidad;;;;;
-337;;Profesional;Toalla intercadala LUXE  Blanca cod. 2112;0;Unidad;;;;;
-338;;Profesional;Toalla intercadala LUXE Blanca cod. 2112;0;Unidad;;;;;
-339;;Profesional;Toalla intercalada LUXE Beige cod. 2081;0;Unidad;;;;;
-340;;Ropa;Jabon liquido ALA 800 ml;3;Unidad;;;;;
-341;;Ropa;Jabon liquido ALA Camellito Ropa Fina 450 ml;3;Unidad;;;;;
-342;;Ropa;Jabon liquido GRANBY 800 ml;2;Unidad;;;;;
-343;;Ropa;Jabon liquido SKIP 500 ml (para diluir);3;Unidad;;;;;
-344;;Ropa;Jabon liquido SKIP 800 ml;0;Unidad;;;;;
-345;291;Ropa;Jabón líquido ALA 500ml Para diluir;3;Unidad;;;;;
-346;;Ropa;Quitamancha VANISH Pre lavado 400 ml;11;Unidad;;;;;
-347;;Ropa;Suavizante COMFORT 3 lts;4;Unidad;;;;;
-348;357;Ropa;Suavizante Tipo Downy;47;Litro ;;;;;
-349;;Ropa;Suavizante VIVERE 3 lts;6;Unidad;;;;;
-350;;Ropa;Suavizante VIVERE 3 lts Botellon;3;Unidad;;;;;
-351;;Ropa;Suavizante VIVERE 900 ml;5;Unidad;;;;;
-352;37;Secadores;Secador Sacchi 40cm;6;Unidad;;;;;
-353;372;Secadores;Secador doble goma MAPUCHE 35cm;3;Unidad;;;;;
-354;373;Secadores;Secador doble goma MAPUCHE 42cm ;3;Unidad;;;;;
-355;40;Secadores;Secador negro sica 30cm;0;Unidad;;;;;
-356;38;Secadores;Secador negro sica 40cm;12;Unidad;;;;;
-357;39;Secadores;Secador negro sica 50cm;0;Unidad;;;;;
-358;201;Venenos;Insecticida Mata mosca y mosquitos EFECTO;8;Unidad;;;;;
-359;181;Venenos;Insecticida X5 Mata Mosca y mosquitos;9;Unidad;;;;;
-360;182;Venenos;Insecticida X5 Max Cucarachas;0;Unidad;;;;;
-361;370;Venenos;Mata yuyo ;4;Unidad;;;;;
-362;218;Venenos;Veneno Veloctrina PLUS;5;Unidad;;;;;
-363;217;Venenos;Veneno Veloctrina ULTRA;0;Unidad;;;;;
-364;280;Venenos;Veneno cucaracha Chino;24;Unidad;;;;;
-365;316;Virales;Acido Citrico 100gr;393;100 gr;;;;;
-366;354;Virales;Chaw Sarro ;104;Unidad;;;;;
-367;364;Virales;Esponja Magica Dawson;63;Unidad;;;;;
-368;369;Virales;Esponja Magica EsfreBom ;20;Unidad;;;;;
-369;363;Virales;Pastilla limpa lavarropa | Washing Machine Cleaner;0;Unidad;;;;;
-370;317;Virales;Percarbonato de Sodio 100gr;243;100 gr;;;;;
+#,Código,Grupo de productos,Producto,Cant.,UM
+1,275,(none),Estacion de Cebado (cucarachicida),0,Unidad
+2,367,(none),Tableta mata mosquitos FUYI x24,0,Unidad
+3,222,Auto,COMBO AUTO (5lts shampoo + 500ml silicona + 500ml caucho),97,Unidad
+4,286,Auto,Caucho base gel Auto,2,Litro
+5,200,Auto,Caucho premium Auto,0,Litro
+6,220,Auto,Esponja Lava auto,4,Unidad
+7,358,Auto,Lava llantas profesional,2,Unidad
+8,273,Auto,Limpia llantas,9,Litro
+9,272,Auto,Limpia tapizado,0,Litro
+10,249,Auto,Paño microfibra 30x30cm,0,Unidad
+11,271,Auto,Quita bichos (autos),0,Litros
+12,255,Auto,Rejilla MAKE Auto 50x55,1,Unidad
+13,199,Auto,Shampoo ciliconado Auto,40,Litro
+14,287,Auto,Silicona Gel Perfumada Auto,4,Litro
+15,214,Auto,Silicona Premium,6,Litro
+16,,Baño,Bloque adherente inodoro PATO,0,Unidad
+17,,Baño,CIF Baño Expert Gatillo 500 ml,10,Unidad
+18,,Baño,CIF Baño Expert Repuesto 450 ml,6,Unidad
+19,,Baño,Canasta inodoro repuesto,0,Unidad
+20,298,Baño,Cepillo lava espalda,0,Unidad
+21,335,Baño,Escobilla baño con base,1,Unidad
+22,24,Baño,Escobilla de baño con recipiente,0,Unidad
+23,,Baño,Limpia inodoros HARPIC 500 ml,5,Unidad
+24,248,Baño,Papel HIGIENOL 4x30mts,0,Unidad
+25,301,Baño,Papel Higienico ELEGANTE 6x30mts,4,Unidad
+26,342,Baño,Papel Higienico HIGIENOL 4x50mt,0,Unidad
+27,302,Baño,Papel Higienico HIGIENOL 4x80 mts,0,Unidad
+28,318,Baño,Papel Higienico M&K 4x80 mts,0,Unidad
+29,126,Baño,Papel higienico 4x30mts,0,Unidad
+30,121,Baño,Papel higienico individual x50 mts,0,Unidad
+31,120,Baño,Papel higienico individual x80 mts,0,Unidad
+32,122,Baño,Papel higienico x10u (300 mts),0,Unidad
+33,123,Baño,Papel higienico x10u (500 mts),0,Unidad
+34,124,Baño,Papel higienico x10u (700 mts),0,Unidad
+35,125,Baño,Papel higienico x10u (900 mts),0,Unidad
+36,306,Baño,Papel higiénico ARO 12x30mts D/H,0,Unidad
+37,305,Baño,Papel higiénico ARO 18x30mts S/H,3,Unidad
+38,294,Baño,Papel higiénico CARREFOUR 18x30mts,0,Unidad
+39,,Baño,Pastilla inodoro para mochila  MR GOLD 50gr,0,Unidad
+40,329,Baño,Pastillas inodoro HARPIC 20gr,12,Unidad
+41,188,Baño,Pastillas inodoro JARDIN 25gr,0,Unidad
+42,129,Cocina,Desengrasante Mr Musc (Naranja),19,Litro
+43,142,Cocina,Detergente 15% (verde),0,Litro
+44,143,Cocina,Detergente 20% (Verde),100,Litro
+45,,Cocina,Detergente ALA concentrado 500 ml,5,Unidad
+46,,Cocina,Detergente CIF 300 ml,6,Unidad
+47,,Cocina,Detergente CIF 500 ml,6,Unidad
+48,,Cocina,Detergente CIF Repuesto 450 ml,4,Unidad
+49,,Cocina,Detergente MAGISTRAL 300 ml,0,Unidad
+50,,Cocina,Detergente MAGISTRAL 500 ml,2,Unidad
+51,264,Cocina,Detergente Magistral Limón,24,Litro
+52,146,Cocina,Escurridor platos,0,Unidad
+53,219,Cocina,Esponja Extralimp Antihaderente,10,Unidad
+54,140,Cocina,Esponja MAKE grande,1,Unidad
+55,332,Cocina,Esponja acero MAKE 15gr,25,Unidad
+56,18,Cocina,Esponja acero chica 10gr,0,Unidad
+57,19,Cocina,Esponja acero mediana 15gr,10,Unidad
+58,331,Cocina,Esponja antihaderente MAKE,19,Unidad
+59,139,Cocina,Esponja con fibra MAKE,22,Unidad
+60,23,Cocina,Esponja fibra ok,2,Unidad
+61,17,Cocina,Esponja salvauña ok,0,Unidad
+62,21,Cocina,Guantes latex MAKE,4,Unidad
+63,117,Cocina,Hiper rollo cocina x3 (360 paños),0,Unidad
+64,119,Cocina,Hiper rollo cocina x8,1,Unidad
+65,116,Cocina,Maxi rollo cocina 200 paños,0,Unidad
+66,118,Cocina,Maxi rollo cocina x 8,0,Unidad
+67,33,Cocina,Rejilla algodón doble 37x30cm,0,Unidad
+68,32,Cocina,Rejilla amarillo multiuso 38x36cm,14,Unidad
+69,12,Cocina,Rejilla pabilo doble NUVIA,2,Unidad
+70,258,Cocina,Repasador estampado,5,Unidad
+71,259,Cocina,Repasador x2,0,Unidad
+72,344,Cocina,Rollo cocina ELEGANTE 200 paños,5,Unidad
+73,366,Cocina,Rollo cocina ELEGANTE 3x100,5,Unidad
+74,303,Cocina,Rollo cocina ELEGANTE 3x50 paños,0,Unidad
+75,,Cocina,Rollo cocina ELEGANTE x 360 paños,3,Unidad
+76,,Cocina,Rollo cocina SUSSEX 200 paños,0,Unidad
+77,353,Cocina,Rollo cocina SUSSEX 3x50,2,Unidad
+78,,Cocina,Rollo de cocina ELEGANTE 3x60,1,Unidad
+79,343,Cocina,Servilleta clasica SUSSEX 80 un,3,Unidad
+80,224,Combo,COMBO BAÑO (5lts lavand + 1lt lav gel + 1lt CIF crema + 1 past inodoro),97,Unidad
+81,223,Combo,COMBO COCINA (5lts det 20% + 1lt deseng + 1 rejilla),99,Unidad
+82,221,Combo,COMBO ROPA (5lts jabon + 1lt lav RP o RC + 1lt Quitam),81,unidad
+83,6,Combo,Combo 1 (Jabon 5lt + Suavizante 5lt),9950,Unidad
+84,145,Combo,Combo 3 (Deter 20% + Lavand + Des. Piso),34,unidad
+85,245,Descartables,Bandeja Pet Bisagra 142,0,Unidad
+86,231,Descartables,Bandeja plastica 103 x5 un,20,Unidad
+87,247,Descartables,Bandeja plastica 105 x 5un,20,Unidad
+88,246,Descartables,Bandeja rectangular plata N1 14x19cm,0,Unidad
+89,241,Descartables,Cuchara plastico plateada x 20 un,0,Unidad
+90,234,Descartables,Cuchara platico blanca x 10 un,0,Unidad
+91,235,Descartables,Cuchara platico blanca x 50 un,0,Unidad
+92,236,Descartables,Cuchara platico sopera x 10 un,20,Unidad
+93,237,Descartables,Cuchara platico sopera x25 un,0,Unidad
+94,240,Descartables,Cuchillo Plastico cristal x25 un,0,Unidad
+95,233,Descartables,Plato plastico 17cm blanco x 50 un,0,Unidad
+96,232,Descartables,Plato plastico 17cm blanco x10 un,0,Unidad
+97,243,Descartables,Servilleta Tissue Rojo 24x24cm x25 un,2,Unidad
+98,244,Descartables,Servilleta Tissue Verde 24x24cm x25un,2,Unidad
+99,242,Descartables,Servilleta de papel ELEGANTE 30x30cm x 20un,0,Unidad
+100,239,Descartables,Tenedor plastico blanco x 50 un,0,Unidad
+101,238,Descartables,Tenedor plastico blanco x10 un,0,Unidad
+102,230,Descartables,Vaso platico descartable 300cc x10 un,20,Unidad
+103,229,Descartables,Vaso platico descartable 500cc x 10 un,0,Unidad
+104,135,Escobas,Barrendero mediano calle (Escobillon),2,Unidad
+105,R719,Escobas,Cabo madera 120 cm,0,Unidad
+106,R768,Escobas,Cabo madera 130 cm,2,Unidad
+107,328,Escobas,Cabo madera 180 cm,5,Unidad
+108,256,Escobas,Escoba Americana ERPEN (chica) c/cabo,5,Unidad
+109,330,Escobas,Escoba ERPEN c/cabo,0,Unidad
+110,257,Escobas,Escoba Recta ERPEN c/cabo,0,Unidad
+111,295,Escobas,Escoba de paja,0,Unidad
+112,137,Escobas,Escoba exterior,4,Unidad
+113,10,Escobas,Escoba moderna,0,Unidad
+114,36,Escobas,Escobillon Ambar 8.5cm,0,Unidad
+115,35,Escobas,Escobillon Coral 10cm,0,Unidad
+116,9,Escobas,Escobillon Palermo,0,Unidad
+117,360,Escobas,Escobillon Pucara MAPUCHE c/cabo,6,Unidad
+118,148,Extras,Bidon,858,Unidad
+119,127,Extras,Envio,959,
+120,133,Extras,Extra,100,
+121,263,Hogar,Aceite Ambar,5,Unidad
+122,289,Hogar,Alcohol FRAU 96% 4.5 Lts,2,Unidad
+123,207,Hogar,Algodón DONCELLA 70gr,1,Unidad
+124,212,Hogar,Amonio cuaternario,0,Unidad
+125,265,Hogar,Apresto Plancha Fácil,10,Litro
+126,22,Hogar,Aromatizante,0,Unidad
+127,170,Hogar,Ayudin desinfectante 332 cc,0,Unidad
+128,,Hogar,BAYGON aerosol Mata Cucaracha y araña,1,Unidad
+129,253,Hogar,Balde 10Lts MAKE Negro,0,Unidad
+130,R513,Hogar,Balde 10lts,0,Unidad
+131,160,Hogar,Balde 11 lts,1,Unidad
+132,346,Hogar,Balde 13 Lts,8,Unidad
+133,254,Hogar,Balde 13Lts con escurridor,1,Unidad
+134,,Hogar,Balde Mopa trapeador 360°,3,Unidad
+135,31,Hogar,Balde de residuo tapa plana 12lts,0,Unidad
+136,30,Hogar,Balde de residuo vaiven 8lts,2,Unidad
+137,167,Hogar,Barre Hoja,0,Unidad
+138,348,Hogar,Barre hojas HARAGAN,0,Unidad
+139,159,Hogar,Bicarbonato de sodio x 100gr,5,Unidad
+140,169,Hogar,Blem Lustramueble 360 cc,7,Unidad
+141,,Hogar,Botellon vidrio 1900 cc,3,Unidad
+142,27,Hogar,Broche plastico x12,3,Unidad
+143,211,Hogar,CIF bio crema 375gr,1,Unidad
+144,180,Hogar,CIF ultra brillo Lavanda,0,Unidad
+145,163,Hogar,Cabo madera 150 cm,5,Unidad
+146,314,Hogar,Cabo metalico 120 cm,2,Unidad
+147,42,Hogar,Cabo sopapa madera,0,Unidad
+148,,Hogar,Canasta cuerina para mate,0,Unidad
+149,R110,Hogar,Canasto ropa corazon,0,Unidad
+150,136,Hogar,Cepillo Planchita gde,1,Unidad
+151,356,Hogar,Cepillo a vapor quita pelos,11,Unidad
+152,165,Hogar,Cepillo lava zapatilla,2,Unidad
+153,164,Hogar,Cepillo p/uña,2,Unidad
+154,268,Hogar,Cepillo para piso duro,1,Unidad
+155,349,Hogar,Cepillo para zapatos MAKE,1,Unidad
+156,195,Hogar,Cera Roja,14,Litro
+157,130,Hogar,Cera incolora,68,Litro
+158,304,Hogar,Cesto basura con pedal,1,Unidad
+159,115,Hogar,Cif crema,38,Litro
+160,158,Hogar,Citronela para ambiente concentrado,5,Unidad
+161,7,Hogar,Combo 2 (Detergente 10% 5lt + Lavandina 5lt + Desodorante 5lt),4,Unidad
+162,R1286,Hogar,Combo trapeador plus,0,Unidad
+163,197,Hogar,Crema de enjuague,20,Litro
+164,113,Hogar,Creolina base Gasoil,5,Litro
+165,213,Hogar,Desengrasante Industrial,94,Unidad
+166,216,Hogar,Desengrasante gel,9,Litro
+167,128,Hogar,Desincrustante/quitasarro (Acido),55,Litro
+168,208,Hogar,Desinfectante CIF 280gr,4,Unidad
+169,209,Hogar,Desodorante REXONA hombre 150ml,0,Unidad
+170,210,Hogar,Desodorante REXONA mujer 150ml,0,Unidad
+171,270,Hogar,Desodorante ambiente POET,0,Unidad
+172,5,Hogar,Desodorante de piso LAVANDA,65,Litro
+173,326,Hogar,Desodorante piso CHICLE,10,Litro
+174,323,Hogar,Desodorante piso CITRONELLA,50,Litro
+175,327,Hogar,Desodorante piso COLONIA,30,Litro
+176,324,Hogar,Desodorante piso LYSOFORM,50,Litro
+177,322,Hogar,Desodorante piso MARINO,13,Litro
+178,325,Hogar,Desodorante piso PINO,34,Litro
+179,177,Hogar,Destapa cañerias x 500ml,0,Unidad
+180,288,Hogar,Destapacañeria PLOMERO LIQUIDO 1Lt,1,Unidad
+181,3,Hogar,Detergente 10% (amarillo),0,Litro
+182,,Hogar,Dispenser detergente 600cc,5,Unidad
+183,266,Hogar,Echo en balde,36,Litro
+184,,Hogar,Envase con valvula 250 ml,18,Unidad
+185,,Hogar,Envase con valvula 500 ml,7,Unidad
+186,311,Hogar,Escoba Cuyen MAPUCHE c/cabo,3,Unidad
+187,29,Hogar,Escurridor para balde sina (repuesto azul),8,Unidad
+188,179,Hogar,Espiral X5,37,Unidad
+189,365,Hogar,Espirales Mosquitos Country RAID (Morado),3,Unidad
+190,205,Hogar,Esponja de acero DEA,0,Unidad
+191,278,Hogar,Filtro Resumidero GELTEK 12x12,0,Unidad
+192,279,Hogar,Filtro Resumidero GELTEK 15x15,0,Unidad
+193,13,Hogar,Franela MAKE,15,Unidad
+194,161,Hogar,Fuenton x 20lts,0,Unidad
+195,134,Hogar,Fuenton x 30lts,0,Unidad
+196,R235,Hogar,Guante de trabajo,0,Unidad
+197,4,Hogar,Hipoclorito 10%,1657,Litro
+198,319,Hogar,Jabon Liquido Tipo Ariel,25,Litro
+199,183,Hogar,Jabon Pan ALA 200 gr,13,Unidad
+200,184,Hogar,Jabon Pan ARGENTINO 2x200gr,0,Unidad
+201,290,Hogar,Jabon Pan GIGANTE 150 gr,0,Unidad
+202,308,Hogar,Jabon Pan SEISEME 300gr,0,Unidad
+203,202,Hogar,Jabon en polvo ALA mano c/bicarb,8,Unidad
+204,203,Hogar,Jabon en polvo ALA matic c/bicarb,5,Unidad
+205,320,Hogar,Jabon liquido Tipo Ala,50,Litro
+206,1,Hogar,Jabon liquido Tipo Skip,200,Litro
+207,131,Hogar,Jabon liquido p/manos,36,Litro
+208,307,Hogar,Jabon pan ARGENTINO 150gr,1,Unidad
+209,299,Hogar,Jabon pan ZORRO,0,Unidad
+210,186,Hogar,Jabon tocador LUX 125gr,0,Unidad
+211,187,Hogar,Jabon tocador REXONA 125gr,0,Unidad
+212,185,Hogar,Jabon tocador ST TROPEZ 125gr,0,Unidad
+213,274,Hogar,Jeringa Cucarachicida 6gr,0,Unidad
+214,276,Hogar,Jeringa Hormiguicida 6gr,4,Unidad
+215,44,Hogar,Lampazo mediano (cera),6,Unidad
+216,8,Hogar,Lavandina,862,Litro
+217,150,Hogar,Lavandina Ropa Blanca,107,Litro
+218,149,Hogar,Lavandina Ropa Color,13,Litro
+219,151,Hogar,Lavandina en Gel,27,Litro
+220,250,Hogar,Limpia techo bochita,0,Unidad
+221,359,Hogar,Limpia vidrio Extensible,2,Unidad
+222,361,Hogar,Limpia vidrio eco 30 cm,1,Unidad
+223,,Hogar,Limpiador polvo ODEX 400 g,10,Unidad
+224,132,Hogar,Limpiavidrio (liquido),30,Litro
+225,166,Hogar,Limpiavidrio 30cm,0,Unidad
+226,198,Hogar,Liquido lampazo,9,Litro
+227,296,Hogar,Lustramueble CERAMICOL 360 cm3,0,Unidad
+228,297,Hogar,Lustramueble CIF Ultra Brillo repuesto 380 ml,2,Unidad
+229,,Hogar,Luz mate,1,Unidad
+230,171,Hogar,Lysoform desinfectante 285 cm3,0,Unidad
+231,292,Hogar,Lysoform desinfectante 360cc,6,Unidad
+232,,Hogar,Mate Camionero algarrobo,2,Unidad
+233,,Hogar,Mate imperial Acero termico,0,Unidad
+234,,Hogar,Mate imperial Calabaza,0,Unidad
+235,,Hogar,Mate imperial liso,2,Unidad
+236,285,Hogar,Mopa 100cm,1,Unidad
+237,281,Hogar,Mopa 30cm,0,Unidad
+238,282,Hogar,Mopa 40cm,0,Unidad
+239,283,Hogar,Mopa 60cm,0,Unidad
+240,284,Hogar,Mopa 80cm,1,Unidad
+241,26,Hogar,Mopa algodon MAKE,6,Unidad
+242,313,Hogar,Mopa algodon NUVIA,0,Unidad
+243,312,Hogar,Mopa micro fibra MAKE,3,Unidad
+244,28,Hogar,Pack 10 bolsas - 45x60cm,0,Unidad
+245,14,Hogar,Pack 10 bolsas - 50x70cm,0,Unidad
+246,15,Hogar,Pack 10 bolsas - 60x90cm,24,Unidad
+247,16,Hogar,Pack 10 bolsas - 80x110cm,16,Unidad
+248,375,Hogar,Pack 20 bolsa 45x60,28,Unidad
+249,374,Hogar,Pack 20 bolsas 50x70,19,Unidad
+250,178,Hogar,Pack 30 bolsas - 45x60 cm,0,Unidad
+251,347,Hogar,Pala c/ cabo NUVIA,1,Unidad
+252,334,Hogar,Pala c/cabo EURO con goma,0,Unidad
+253,138,Hogar,Pala c/cabo Premium,0,Unidad
+254,341,Hogar,Pala c/cabo sin goma EURO,2,Unidad
+255,43,Hogar,Pala plastico,3,Unidad
+256,20,Hogar,Pala punta de goma,5,Unidad
+257,368,Hogar,Papel Higienico ELEGANTE 4x30mts,6,Unidad
+258,,Hogar,Papel Higienico ELEGANTE 4x80mts,2,Unidad
+259,,Hogar,Papel higienico ELITE Doble Hoja 4x50mts,0,Unidad
+260,172,Hogar,Pasta dental Oral-B Extra Blanco 150gr,0,Unidad
+261,293,Hogar,Pastilla inodoro GLADE Lavanda,0,Unidad
+262,371,Hogar,Pastillas Cloro 50gr c/u,30,Unidad
+263,355,Hogar,Pastillas Mata mosquitos RAID,0,Unidad
+264,350,Hogar,Paño microfibra (pack x 3),7,Unidad
+265,309,Hogar,Pañuelos descartables ELEGANTE,1,Unidad
+266,144,Hogar,Perfumina,1,Litro
+267,251,Hogar,Perfumina MASPLUS,0,Unidad
+268,162,Hogar,Plumero de lana,1,Unidad
+269,337,Hogar,Plumero de microfibra,5,Unidad
+270,R1046,Hogar,Plumero nro 1,0,Unidad
+271,25,Hogar,Plumero poliester 20gr,0,Unidad
+272,,Hogar,Porta mate cuerina,2,Unidad
+273,,Hogar,Pulverizador 250 ml,14,Unidad
+274,,Hogar,Pulverizador 500 ml,6,Unidad
+275,141,Hogar,Pulverizador x 750ml Make,9,Unidad
+276,114,Hogar,Quitamanchas (Trenet),10,Litro
+277,277,Hogar,Raticida x10,0,Unidad
+278,269,Hogar,Rejillla Americana 42x38cm,0,Unidad
+279,168,Hogar,Repelente Citronella x250ml,5,Unidad
+280,,Hogar,Repelente para mosquitos AKTIOL 143ml/90g,10,Unidad
+281,226,Hogar,Rollo Film 5mts,1,Unidad
+282,227,Hogar,Rollo Papel Aluminio 5mts,0,Unidad
+283,228,Hogar,Rollo Papel Manteca 15mts,1,Unidad
+284,193,Hogar,SUIZA Autobrillo 400 ml,2,Unidad
+285,156,Hogar,Sahumerio x 15 un,1,Unidad
+286,262,Hogar,Sahumerio x 20 un,0,Unidad
+287,260,Hogar,Saphirus Aceite,1,Unidad
+288,261,Hogar,Saphirus Aerosol Aromatizante,2,Unidad
+289,154,Hogar,Saphirus Difusor,4,Unidad
+290,152,Hogar,Saphirus Home Spray 500 ml,0,Unidad
+291,153,Hogar,Saphirus Textil 250 ml,11,Unidad
+292,155,Hogar,Saphirus mini 60ml,0,Unidad
+293,300,Hogar,Shampoo Pulguicida,5,
+294,196,Hogar,Shampoo pelo,8,Litro
+295,41,Hogar,Sopapa goma negra,7,Unidad
+296,321,Hogar,Suavizante Tipo Comfort,50,Litro
+297,2,Hogar,Suavizante Tipo Vivere,50,Litro
+298,,Hogar,Tabla chica con pala,0,Unidad
+299,,Hogar,Tabla grande con pala,1,Unidad
+300,206,Hogar,Talco EFFICIENT 100gr,0,Unidad
+301,,Hogar,Termo media manija,1,Unidad
+302,192,Hogar,Trapo de pido LA PONDEROSA,0,Unidad
+303,34,Hogar,Trapo de piso  FIBRAN Clean,7,Unidad
+304,351,Hogar,Trapo de piso LA PONDEROSA Clasico,8,Unidad
+305,191,Hogar,Trapo de piso LA PONDEROSA compacto,0,Unidad
+306,190,Hogar,Trapo de piso MEDIA NARANJA,0,Unidad
+307,352,Hogar,Trapo de piso MEDIA NARANJA Ref G,9,Unidad
+308,189,Hogar,Trapo de piso MEDIA NARANJA compacto G,0,Unidad
+309,345,Hogar,Trapo de piso Rayado FIBRAN,6,Unidad
+310,R336,Hogar,Trapo de piso amarillo,0,Unidad
+311,11,Hogar,Trapo de piso consorcio gris,0,Unidad
+312,362,Hogar,Trapo de piso microfibra,7,Unidad
+313,112,Hogar,Trapo soft sina blanco,6,Unidad
+314,252,Hogar,Veneno Cipermetrina,13,Litro
+315,225,Hogar,Vinagre de alcohol,0,Unidad
+316,204,Hogar,Virulana DEA,0,Unidad
+317,333,Hogar,Virulana de acero NUVIA,3,Unidad
+318,310,Hogar,Yerba CHAMIGO 1 kg,4,Unidad
+319,,Hogar,Yerbero y azucarero,3,Unidad
+320,267,Pileta,Alguicida,17,Litro
+321,338,Pileta,Alguicida WATER DAY,5,Litro
+322,173,Pileta,Boya dosificadora para pileta,0,Unidad
+323,340,Pileta,Boya pileta,0,Unidad
+324,215,Pileta,Clarificante,14,Litro
+325,339,Pileta,Clarificante WATER DAY,5,Litro
+326,176,Pileta,Cloro granulado 1kg,5,kilos
+327,147,Pileta,Cloro liquido (pileta),135,Litro
+328,157,Pileta,H2O Plus Pileta,0,Unidad
+329,175,Pileta,Pastillas cloro triple accion 200 gr,10,Unidad
+330,174,Pileta,Saca hojas para pileta,1,Unidad
+331,194,Pileta,Sulfato de Aluminio,18,Kilo
+332,,Profesional,Papel Higienico Blanco 8x300 mts cod. 300,0,Unidad
+333,,Profesional,Papel Higienico Blanco 8x300 mts cod. 306,0,Unidad
+334,,Profesional,Papel Higienico SAUCO 8x300mts cod.304,0,Unidad
+335,315,Profesional,Servilleta Alumax 18x18 cm,10,Caja
+336,,Profesional,Toalla intercadada SAUCO Beige cod. 1101,0,Unidad
+337,,Profesional,Toalla intercadala LUXE  Blanca cod. 2112,0,Unidad
+338,,Profesional,Toalla intercadala LUXE Blanca cod. 2112,0,Unidad
+339,,Profesional,Toalla intercalada LUXE Beige cod. 2081,0,Unidad
+340,,Ropa,Jabon liquido ALA 800 ml,3,Unidad
+341,,Ropa,Jabon liquido ALA Camellito Ropa Fina 450 ml,3,Unidad
+342,,Ropa,Jabon liquido GRANBY 800 ml,2,Unidad
+343,,Ropa,Jabon liquido SKIP 500 ml (para diluir),3,Unidad
+344,,Ropa,Jabon liquido SKIP 800 ml,0,Unidad
+345,291,Ropa,Jabón líquido ALA 500ml Para diluir,3,Unidad
+346,,Ropa,Quitamancha VANISH Pre lavado 400 ml,11,Unidad
+347,,Ropa,Suavizante COMFORT 3 lts,4,Unidad
+348,357,Ropa,Suavizante Tipo Downy,47,Litro
+349,,Ropa,Suavizante VIVERE 3 lts,6,Unidad
+350,,Ropa,Suavizante VIVERE 3 lts Botellon,3,Unidad
+351,,Ropa,Suavizante VIVERE 900 ml,5,Unidad
+352,37,Secadores,Secador Sacchi 40cm,6,Unidad
+353,372,Secadores,Secador doble goma MAPUCHE 35cm,3,Unidad
+354,373,Secadores,Secador doble goma MAPUCHE 42cm,3,Unidad
+355,40,Secadores,Secador negro sica 30cm,0,Unidad
+356,38,Secadores,Secador negro sica 40cm,12,Unidad
+357,39,Secadores,Secador negro sica 50cm,0,Unidad
+358,201,Venenos,Insecticida Mata mosca y mosquitos EFECTO,8,Unidad
+359,181,Venenos,Insecticida X5 Mata Mosca y mosquitos,9,Unidad
+360,182,Venenos,Insecticida X5 Max Cucarachas,0,Unidad
+361,370,Venenos,Mata yuyo,4,Unidad
+362,218,Venenos,Veneno Veloctrina PLUS,5,Unidad
+363,217,Venenos,Veneno Veloctrina ULTRA,0,Unidad
+364,280,Venenos,Veneno cucaracha Chino,24,Unidad
+365,316,Virales,Acido Citrico 100gr,393,100 gr
+366,354,Virales,Chaw Sarro,104,Unidad
+367,364,Virales,Esponja Magica Dawson,63,Unidad
+368,369,Virales,Esponja Magica EsfreBom,20,Unidad
+369,363,Virales,Pastilla limpa lavarropa | Washing Machine Cleaner,0,Unidad
+370,317,Virales,Percarbonato de Sodio 100gr,243,100 gr

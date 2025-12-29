@@ -10,6 +10,7 @@ services:
     volumes:
       - dawson_db:/var/lib/postgresql/data
       - ./db/init:/docker-entrypoint-initdb.d:ro
+      - ./import:/import
 
   api:
     build: ./api
@@ -23,6 +24,8 @@ services:
     depends_on:
       - db
     volumes:
+      - ./api:/app
+      - /app/node_modules
       - ./import:/import
 
   admin-web:
