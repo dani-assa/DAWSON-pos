@@ -6,15 +6,61 @@ import { sendError } from "../errors.js";
 export const productsAdminRouter = express.Router();
 productsAdminRouter.use(requireAuth);
 
+/**
+ * Reglas de dinero:
+ * - La API trabaja en PESOS sin centavos (enteros).
+ * - La DB guarda en CENTAVOS (integer).
+ */
+function parsePesosInt(value) {
+  if (value === null || value === undefined) return null;
+  const s = String(value).trim();
+  if (!s) return null;
+
+  // soporta "2100" y "2.100" (separador de miles)
+  const normalized = s.replace(/\./g, "");
+  const n = Number(normalized);
+  if (!Number.isFinite(n)) return null;
+
+  // sin centavos: entero
+  return Math.round(n);
+}
+function pesosToCents(pesos) {
+  if (pesos === null || pesos === undefined) return null;
+  return pesos * 100;
+}
+function centsToPesos(centavos) {
+  if (centavos === null || centavos === undefined) return null;
+  return Math.round(Number(centavos) / 100);
+}
+function normalizeProductRow(row) {
+  // precioVenta viene de SQL como numeric/string si hacemos /100.0, o como int si viene centavos
+  // En este archivo, SIEMPRE devolvemos precioVenta en PESOS (int).
+  const out = { ...row };
+
+  if (out.precioVenta !== undefined && out.precioVenta !== null) {
+    // puede venir como "2100.000000"
+    const n = Number(String(out.precioVenta));
+    out.precioVenta = Number.isFinite(n) ? Math.round(n) : out.precioVenta;
+  }
+
+  if (out.cantidadDescuento !== undefined && out.cantidadDescuento !== null) {
+    const n = Number(String(out.cantidadDescuento));
+    out.cantidadDescuento = Number.isFinite(n) ? n : out.cantidadDescuento;
+  }
+
+  return out;
+}
+
 // ADMIN: crear/listar producto base, crear/listar presentaciones, ajustar stock
 productsAdminRouter.get("/product-bases", requireRole("ADMIN"), async (req, res) => {
   const includeArchived = (req.query.includeArchived || "false").toString() === "true";
   try {
-    const { rows } = await pool.query(`SELECT id as "productBaseId", nombre, categoria, unidad_stock as "unidadStock",
+    const { rows } = await pool.query(
+      `SELECT id as "productBaseId", nombre, categoria, unidad_stock as "unidadStock",
               stock_actual as "stockActual", stock_minimo as "stockMinimo", activo
-       FROM product_bases
-       WHERE ($1::boolean = true) OR archivado = false
-       ORDER BY nombre ASC`,
+      FROM product_bases
+      WHERE ($1::boolean = true) OR archivado = false
+      ORDER BY nombre ASC`,
       [includeArchived]
     );
     return res.json({ items: rows });
@@ -32,9 +78,9 @@ productsAdminRouter.post("/product-bases", requireRole("ADMIN"), async (req, res
 
     const { rows } = await pool.query(
       `INSERT INTO product_bases(nombre, categoria, unidad_stock, stock_minimo, activo)
-       VALUES ($1,$2,$3,COALESCE($4,0),COALESCE($5,true))
-       RETURNING id as "productBaseId", nombre, categoria, unidad_stock as "unidadStock",
-                 stock_actual as "stockActual", stock_minimo as "stockMinimo", activo`,
+      VALUES ($1,$2,$3,COALESCE($4,0),COALESCE($5,true))
+      RETURNING id as "productBaseId", nombre, categoria, unidad_stock as "unidadStock",
+                stock_actual as "stockActual", stock_minimo as "stockMinimo", activo`,
       [nombre, categoria, unidadStock, stockMinimo ?? null, activo ?? null]
     );
     return res.status(201).json(rows[0]);
@@ -62,21 +108,27 @@ productsAdminRouter.get("/products", requireRole("ADMIN"), async (req, res) => {
     const countQ = `SELECT COUNT(*)::int AS total FROM products p ${where}`;
     const listQ = `
       SELECT p.id as "productId",
-             p.product_base_id as "productBaseId",
-             p.nombre,
-             p.categoria,
-             p.tipo,
-             p.cantidad_descuento as "cantidadDescuento",
-             p.precio_venta_centavos as "precioVenta",
-             p.activo
+            p.product_base_id as "productBaseId",
+            p.nombre,
+            p.categoria,
+            p.tipo,
+            p.cantidad_descuento as "cantidadDescuento",
+            -- devolver PESOS (pero puede venir como string numeric)
+            (p.precio_venta_centavos / 100.0) as "precioVenta",
+            p.activo
       FROM products p
       ${where}
       ORDER BY p.nombre ASC
       LIMIT ${pageSize} OFFSET ${offset}
     `;
 
-    const [{ rows: c }, { rows }] = await Promise.all([pool.query(countQ, params), pool.query(listQ, params)]);
-    return res.json({ items: rows, page, pageSize, total: c[0]?.total || 0 });
+    const [{ rows: c }, { rows }] = await Promise.all([
+      pool.query(countQ, params),
+      pool.query(listQ, params),
+    ]);
+
+    const items = rows.map(normalizeProductRow);
+    return res.json({ items, page, pageSize, total: c[0]?.total || 0 });
   } catch (e) {
     return sendError(res, e);
   }
@@ -85,21 +137,36 @@ productsAdminRouter.get("/products", requireRole("ADMIN"), async (req, res) => {
 productsAdminRouter.post("/products", requireRole("ADMIN"), async (req, res) => {
   try {
     const { productBaseId, nombre, categoria, tipo, cantidadDescuento, precioVenta, activo } = req.body || {};
-    if (!productBaseId || !nombre || !categoria || !tipo || cantidadDescuento === undefined || precioVenta === undefined || activo === undefined) {
+    if (
+      !productBaseId ||
+      !nombre ||
+      !categoria ||
+      !tipo ||
+      cantidadDescuento === undefined ||
+      precioVenta === undefined ||
+      activo === undefined
+    ) {
       return res.status(400).json({ error: "bad_request", message: "Faltan campos obligatorios" });
     }
+
+    const precioVentaPesos = parsePesosInt(precioVenta);
+    if (precioVentaPesos === null) {
+      return res.status(400).json({ error: "bad_request", message: "precioVenta inválido" });
+    }
+    const precioVentaCentavos = pesosToCents(precioVentaPesos);
 
     const { rows: pb } = await pool.query(`SELECT id FROM product_bases WHERE id=$1`, [productBaseId]);
     if (!pb[0]) return res.status(404).json({ error: "not_found", message: "Recurso no encontrado" });
 
     const { rows } = await pool.query(
       `INSERT INTO products(product_base_id, nombre, categoria, tipo, cantidad_descuento, precio_venta_centavos, activo)
-       VALUES ($1,$2,$3,$4,$5,$6,$7)
-       RETURNING id as "productId", product_base_id as "productBaseId", nombre, categoria, tipo,
-                 cantidad_descuento as "cantidadDescuento", precio_venta_centavos as "precioVenta", activo`,
-      [productBaseId, nombre, categoria, tipo, cantidadDescuento, precioVenta, activo]
+      VALUES ($1,$2,$3,$4,$5,$6,$7)
+      RETURNING id as "productId", product_base_id as "productBaseId", nombre, categoria, tipo,
+                cantidad_descuento as "cantidadDescuento", (precio_venta_centavos/100.0) as "precioVenta", activo`,
+      [productBaseId, nombre, categoria, tipo, cantidadDescuento, precioVentaCentavos, activo]
     );
-    return res.status(201).json(rows[0]);
+
+    return res.status(201).json(normalizeProductRow(rows[0]));
   } catch (e) {
     return sendError(res, e);
   }
@@ -125,33 +192,34 @@ productsAdminRouter.post("/product-bases/:productBaseId/stock-adjust", requireRo
 
     await client.query(
       `INSERT INTO stock_movements(product_base_id, tipo, cantidad, referencia_tipo, referencia_id, usuario_id)
-       VALUES ($1,'AJUSTE',$2,'STOCK_ADJUST',$3,$4)`,
+      VALUES ($1,'AJUSTE',$2,'STOCK_ADJUST',$3,$4)`,
       [productBaseId, qty, productBaseId, req.user.id]
     );
 
     await client.query(
       `INSERT INTO audit_log(usuario_id, accion, entidad, entidad_id, metadata)
-       VALUES ($1,'STOCK_ADJUST','product_base',$2,$3)`,
+      VALUES ($1,'STOCK_ADJUST','product_base',$2,$3)`,
       [req.user.id, productBaseId, JSON.stringify({ cantidad: qty, motivo })]
     );
 
     const { rows: pbOut } = await client.query(
       `SELECT id as "productBaseId", nombre, categoria, unidad_stock as "unidadStock",
               stock_actual as "stockActual", stock_minimo as "stockMinimo", activo
-       FROM product_bases WHERE id=$1`,
+      FROM product_bases WHERE id=$1`,
       [productBaseId]
     );
 
     await client.query("COMMIT");
     return res.json(pbOut[0]);
   } catch (e) {
-    try { await client.query("ROLLBACK"); } catch {}
+    try {
+      await client.query("ROLLBACK");
+    } catch {}
     return sendError(res, e);
   } finally {
     client.release();
   }
 });
-
 
 // PATCH /products/:productId (ADMIN)
 productsAdminRouter.patch("/products/:productId", requireRole("ADMIN"), async (req, res) => {
@@ -159,18 +227,28 @@ productsAdminRouter.patch("/products/:productId", requireRole("ADMIN"), async (r
     const { productId } = req.params;
     const { nombre, precioVenta, activo } = req.body || {};
 
+    let precioVentaCentavos = null;
+    if (precioVenta !== undefined) {
+      const precioVentaPesos = parsePesosInt(precioVenta);
+      if (precioVentaPesos === null) {
+        return res.status(400).json({ error: "bad_request", message: "precioVenta inválido" });
+      }
+      precioVentaCentavos = pesosToCents(precioVentaPesos);
+    }
+
     const { rows } = await pool.query(
       `UPDATE products
-       SET nombre=COALESCE($2,nombre),
-           precio_venta_centavos=COALESCE($3,precio_venta_centavos),
-           activo=COALESCE($4,activo)
-       WHERE id=$1
-       RETURNING id as "productId", product_base_id as "productBaseId", nombre, categoria, tipo, cantidad_descuento as "cantidadDescuento",
-                 precio_venta_centavos as "precioVenta", activo`,
-      [productId, nombre ?? null, precioVenta ?? null, activo ?? null]
+      SET nombre=COALESCE($2,nombre),
+          precio_venta_centavos=COALESCE($3,precio_venta_centavos),
+          activo=COALESCE($4,activo)
+      WHERE id=$1
+      RETURNING id as "productId", product_base_id as "productBaseId", nombre, categoria, tipo,
+                cantidad_descuento as "cantidadDescuento", (precio_venta_centavos/100.0) as "precioVenta", activo`,
+      [productId, nombre ?? null, precioVenta !== undefined ? precioVentaCentavos : null, activo ?? null]
     );
+
     if (!rows[0]) return res.status(404).json({ error: "not_found", message: "Recurso no encontrado" });
-    return res.json(rows[0]);
+    return res.json(normalizeProductRow(rows[0]));
   } catch (e) {
     return sendError(res, e);
   }
@@ -184,13 +262,13 @@ productsAdminRouter.patch("/product-bases/:productBaseId", requireRole("ADMIN"),
 
     const { rows } = await pool.query(
       `UPDATE product_bases
-       SET nombre=COALESCE($2,nombre),
-           categoria=COALESCE($3,categoria),
-           stock_minimo=COALESCE($4,stock_minimo),
-           activo=COALESCE($5,activo)
-       WHERE id=$1
-       RETURNING id as "productBaseId", nombre, categoria, unidad_stock as "unidadStock",
-                 stock_actual as "stockActual", stock_minimo as "stockMinimo", activo`,
+      SET nombre=COALESCE($2,nombre),
+          categoria=COALESCE($3,categoria),
+          stock_minimo=COALESCE($4,stock_minimo),
+          activo=COALESCE($5,activo)
+      WHERE id=$1
+      RETURNING id as "productBaseId", nombre, categoria, unidad_stock as "unidadStock",
+                stock_actual as "stockActual", stock_minimo as "stockMinimo", activo`,
       [productBaseId, nombre ?? null, categoria ?? null, stockMinimo ?? null, activo ?? null]
     );
     if (!rows[0]) return res.status(404).json({ error: "not_found", message: "Recurso no encontrado" });
@@ -199,7 +277,6 @@ productsAdminRouter.patch("/product-bases/:productBaseId", requireRole("ADMIN"),
     return sendError(res, e);
   }
 });
-
 
 // (ADMIN) Eliminar/Archivar presentación
 productsAdminRouter.delete("/products/:productId", requireRole("ADMIN"), async (req, res) => {
@@ -218,11 +295,11 @@ productsAdminRouter.delete("/products/:productId", requireRole("ADMIN"), async (
     if (referenced) {
       const { rows } = await client.query(
         `UPDATE products SET activo=false, archivado=true WHERE id=$1
-         RETURNING id as "productId", product_base_id as "productBaseId", nombre, categoria, tipo,
-                   cantidad_descuento as "cantidadDescuento", precio_venta_centavos as "precioVenta", activo, archivado`,
+        RETURNING id as "productId", product_base_id as "productBaseId", nombre, categoria, tipo,
+                  cantidad_descuento as "cantidadDescuento", ROUND(precio_venta_centavos/100.0)::int as "precioVenta", activo, archivado`,
         [productId]
       );
-      return res.json({ deletedMode: "SOFT", item: rows[0] });
+      return res.json({ deletedMode: "SOFT", item: normalizeProductRow(rows[0]) });
     }
 
     await client.query(`DELETE FROM products WHERE id=$1`, [productId]);
@@ -251,8 +328,8 @@ productsAdminRouter.delete("/product-bases/:productBaseId", requireRole("ADMIN")
     if (referenced) {
       const { rows } = await client.query(
         `UPDATE product_bases SET activo=false, archivado=true WHERE id=$1
-         RETURNING id as "productBaseId", nombre, categoria, unidad_stock as "unidadStock",
-                   stock_actual as "stockActual", stock_minimo as "stockMinimo", activo, archivado`,
+        RETURNING id as "productBaseId", nombre, categoria, unidad_stock as "unidadStock",
+                  stock_actual as "stockActual", stock_minimo as "stockMinimo", activo, archivado`,
         [productBaseId]
       );
       return res.json({ deletedMode: "SOFT", item: rows[0] });

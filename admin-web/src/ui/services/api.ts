@@ -47,13 +47,15 @@ export const api = {
     }
     return await res.json()
   },
+
   async listProductBases(includeArchived: boolean = false): Promise<{ items: ProductBase[] }> {
     const res = await fetch(`${API_URL}/product-bases?includeArchived=${includeArchived}`, { headers: { ...authHeader() } })
     if (!res.ok) throw new Error(await safeMsg(res) || 'Error al listar productos base')
     return await res.json()
   },
+
   async createProductBase(payload: CreateProductBaseRequest): Promise<ProductBase> {
-    const res = await fetch(`${API_URL}/product-bases?includeArchived=${includeArchived}`, {
+    const res = await fetch(`${API_URL}/product-bases`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...authHeader() },
       body: JSON.stringify(payload),
@@ -61,6 +63,7 @@ export const api = {
     if (!res.ok) throw new Error(await safeMsg(res) || 'Error al crear producto base')
     return await res.json()
   },
+
   async adjustStock(productBaseId: string, payload: StockAdjustRequest): Promise<ProductBase> {
     const res = await fetch(`${API_URL}/product-bases/${productBaseId}/stock-adjust`, {
       method: 'POST',
@@ -70,6 +73,7 @@ export const api = {
     if (!res.ok) throw new Error(await safeMsg(res) || 'Error al ajustar stock')
     return await res.json()
   },
+
   async listProducts(search: string, page: number, pageSize: number, includeArchived: boolean = false): Promise<ProductListResponse> {
     const params = new URLSearchParams()
     if (search) params.set('search', search)
@@ -80,6 +84,7 @@ export const api = {
     if (!res.ok) throw new Error(await safeMsg(res) || 'Error al listar presentaciones')
     return await res.json()
   },
+
   async createProduct(payload: CreateProductRequest): Promise<Product> {
     const res = await fetch(`${API_URL}/products`, {
       method: 'POST',
@@ -89,6 +94,7 @@ export const api = {
     if (!res.ok) throw new Error(await safeMsg(res) || 'Error al crear presentación')
     return await res.json()
   },
+
   async toggleProductActive(productId: string, activo: boolean): Promise<Product> {
     const res = await fetch(`${API_URL}/products/${productId}`, {
       method: 'PATCH',
@@ -98,7 +104,8 @@ export const api = {
     if (!res.ok) throw new Error(await safeMsg(res) || 'Error al cambiar activo')
     return await res.json()
   },
-  async updateProductBase(productBaseId: string, payload: Partial<Pick<ProductBase,'nombre'|'unidadStock'|'stockMinimo'|'activo'>>): Promise<ProductBase> {
+
+  async updateProductBase(productBaseId: string, payload: Partial<Pick<ProductBase, 'nombre' | 'unidadStock' | 'stockMinimo' | 'activo'>>): Promise<ProductBase> {
     const res = await fetch(`${API_URL}/product-bases/${productBaseId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', ...authHeader() },
@@ -108,7 +115,7 @@ export const api = {
     return res.json()
   },
 
-  async updateProduct(productId: string, payload: Partial<Pick<Product,'nombre'|'categoria'|'tipo'|'cantidadDescuento'|'precioVenta'|'activo'>>): Promise<Product> {
+  async updateProduct(productId: string, payload: Partial<Pick<Product, 'nombre' | 'categoria' | 'tipo' | 'cantidadDescuento' | 'precioVenta' | 'activo'>>): Promise<Product> {
     const res = await fetch(`${API_URL}/products/${productId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', ...authHeader() },
@@ -118,7 +125,7 @@ export const api = {
     return res.json()
   },
 
-async toggleProductBaseActive(productBaseId: string, activo: boolean): Promise<ProductBase> {
+  async toggleProductBaseActive(productBaseId: string, activo: boolean): Promise<ProductBase> {
     const res = await fetch(`${API_URL}/product-bases/${productBaseId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', ...authHeader() },
@@ -172,15 +179,18 @@ export type Product = {
   categoria: Categoria
   tipo: ProductoTipo
   cantidadDescuento: number
-  precioVenta: number // centavos
+  // IMPORTANT: desde ahora, la API trabaja en PESOS (sin centavos)
+  precioVenta: number
   activo: boolean
 }
+
 export type CreateProductRequest = {
   productBaseId: string
   nombre: string
   categoria: Categoria
   tipo: ProductoTipo
   cantidadDescuento: number
+  // PESOS (sin centavos)
   precioVenta: number
   activo: boolean
 }

@@ -1,8 +1,25 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { api, Product, ProductBase, ProductoTipo } from '../services/api'
 import { Modal } from '../widgets/Modal'
 
-const TIPOS: ProductoTipo[] = ['GRANEL','MARCA','COMBO']
+const TIPOS: ProductoTipo[] = ['GRANEL', 'MARCA', 'COMBO']
+
+function formatPesos(value: number) {
+  const n = Number(value)
+  if (!Number.isFinite(n)) return String(value)
+  return n.toLocaleString('es-AR', { maximumFractionDigits: 0 })
+}
+
+function parsePesosInput(s: string): number | null {
+  const raw = String(s ?? '').trim()
+  if (!raw) return null
+  // permite "2.100" y "2100"
+  const normalized = raw.replace(/\./g, '').replace(',', '.')
+  const n = Number(normalized)
+  if (!Number.isFinite(n)) return null
+  // sin centavos: entero
+  return Math.round(n)
+}
 
 export function ProductsPage() {
   const [items, setItems] = useState<Product[]>([])
@@ -22,7 +39,10 @@ export function ProductsPage() {
     setError('')
     setLoading(true)
     try {
-      const [pb, pr] = await Promise.all([api.listProductBases(), api.listProducts(search, page, pageSize)])
+      const [pb, pr] = await Promise.all([
+        api.listProductBases(),
+        api.listProducts(search, page, pageSize, includeArchived),
+      ])
       setBases(pb.items)
       setItems(pr.items)
       setTotal(pr.total)
@@ -33,18 +53,24 @@ export function ProductsPage() {
     }
   }
 
-  useEffect(() => { refresh() }, [page, pageSize])
+  useEffect(() => {
+    refresh()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, pageSize, includeArchived])
 
-  const doSearch = () => { setPage(1); refresh() }
+  const doSearch = () => {
+    setPage(1)
+    refresh()
+  }
 
   const toggleActive = async (p: Product) => {
     const next = !p.activo
-    setItems(prev => prev.map(x => x.productId === p.productId ? { ...x, activo: next } : x))
+    setItems(prev => prev.map(x => (x.productId === p.productId ? { ...x, activo: next } : x)))
     try {
       await api.updateProduct(p.productId, { activo: next })
     } catch (e: any) {
       setError(e?.message || 'Error')
-      setItems(prev => prev.map(x => x.productId === p.productId ? { ...x, activo: p.activo } : x))
+      setItems(prev => prev.map(x => (x.productId === p.productId ? { ...x, activo: p.activo } : x)))
     }
   }
 
@@ -53,10 +79,27 @@ export function ProductsPage() {
       <div className="card" style={{ padding: 14 }}>
         <div className="row space">
           <div className="row" style={{ gap: 10, flexWrap: 'wrap' }}>
-            <button className="btn primary" onClick={() => setShowCreate(true)}>Nueva presentación</button>
+            <button className="btn primary" onClick={() => setShowCreate(true)}>
+              Nueva presentación
+            </button>
 
-            <input className="input" style={{ width: 280 }} value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Buscar por nombre (exacto/parcial)" />
+            <input
+              className="input"
+              style={{ width: 280 }}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Buscar por nombre (exacto/parcial)"
+            />
             <button className="btn" onClick={doSearch}>Buscar</button>
+
+            <label className="row" style={{ gap: 8, marginLeft: 10 }}>
+              <input
+                type="checkbox"
+                checked={includeArchived}
+                onChange={(e) => { setIncludeArchived(e.target.checked); setPage(1) }}
+              />
+              <span className="small">Incluir archivados</span>
+            </label>
           </div>
           <button className="btn" onClick={refresh}>Actualizar</button>
         </div>
@@ -86,15 +129,17 @@ export function ProductsPage() {
               <tr key={p.productId}>
                 <td>
                   <div style={{ fontWeight: 650 }}>{p.nombre}</div>
-                  <div className="small">Base: {bases.find(b => b.productBaseId === p.productBaseId)?.nombre || p.productBaseId}</div>
+                  <div className="small">
+                    Base: {bases.find(b => b.productBaseId === p.productBaseId)?.nombre || p.productBaseId}
+                  </div>
                 </td>
                 <td>{p.tipo}</td>
                 <td>{p.cantidadDescuento}</td>
-                <td>${(p.precioVenta / 100).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                <td>${formatPesos(p.precioVenta)}</td>
                 <td><span className={'badge ' + (p.activo ? 'on' : 'off')}>{p.activo ? 'Activo' : 'Inactivo'}</span></td>
                 <td>
                   <button className="btn" onClick={() => setShowEdit(p)}>Editar</button>
-                    <button className={p.activo ? 'btn danger' : 'btn primary'} onClick={() => toggleActive(p)}>
+                  <button className={p.activo ? 'btn danger' : 'btn primary'} onClick={() => toggleActive(p)}>
                     {p.activo ? 'Desactivar' : 'Activar'}
                   </button>
                 </td>
@@ -111,11 +156,10 @@ export function ProductsPage() {
           <span className="badge">Página {page}</span>
           <button className="btn" disabled={(page * pageSize) >= total} onClick={() => setPage(p => p + 1)}>Siguiente</button>
           <select className="select" style={{ width: 110 }} value={pageSize} onChange={(e) => setPageSize(parseInt(e.target.value, 10))}>
-            {[10,25,50,100].map(n => <option key={n} value={n}>{n}/pág</option>)}
+            {[10, 25, 50, 100].map(n => <option key={n} value={n}>{n}/pág</option>)}
           </select>
         </div>
       </div>
-
 
       {showEdit && (
         <EditProductModal
@@ -143,7 +187,7 @@ function CreateProductModal({ bases, onClose, onCreated }: { bases: ProductBase[
   const [categoria, setCategoria] = useState('JABON_ROPA')
   const [tipo, setTipo] = useState<ProductoTipo>('GRANEL')
   const [cantidadDescuento, setCantidadDescuento] = useState('1')
-  const [precioVenta, setPrecioVenta] = useState('0') // pesos con decimal
+  const [precioVenta, setPrecioVenta] = useState('0') // PESOS sin centavos
   const [activo, setActivo] = useState(true)
   const [error, setError] = useState('')
   const [saving, setSaving] = useState(false)
@@ -152,11 +196,12 @@ function CreateProductModal({ bases, onClose, onCreated }: { bases: ProductBase[
     setError('')
     if (!productBaseId) { setError('Elegí un producto base'); return }
     if (!nombre.trim()) { setError('Nombre obligatorio'); return }
+
     const qty = Number(cantidadDescuento)
     if (!Number.isFinite(qty) || qty <= 0) { setError('Cantidad descuento inválida'); return }
-    const pesos = Number(precioVenta.replace(',', '.'))
-    if (!Number.isFinite(pesos) || pesos < 0) { setError('Precio inválido'); return }
-    const centavos = Math.round(pesos * 100)
+
+    const pesosInt = parsePesosInput(precioVenta)
+    if (pesosInt === null || pesosInt < 0) { setError('Precio inválido'); return }
 
     setSaving(true)
     try {
@@ -166,7 +211,7 @@ function CreateProductModal({ bases, onClose, onCreated }: { bases: ProductBase[
         categoria: categoria.trim(),
         tipo,
         cantidadDescuento: qty,
-        precioVenta: centavos,
+        precioVenta: pesosInt, // PESOS
         activo,
       })
       onCreated()
@@ -208,9 +253,9 @@ function CreateProductModal({ bases, onClose, onCreated }: { bases: ProductBase[
           <div className="small">Ej: 1 o 5 (descuenta del stock base)</div>
         </div>
         <div className="col">
-          <label className="small">Precio venta (pesos)</label>
-          <input className="input" value={precioVenta} onChange={(e) => setPrecioVenta(e.target.value)} placeholder="Ej: 2800.00" />
-          <div className="small">Se guarda en centavos.</div>
+          <label className="small">Precio venta ($)</label>
+          <input className="input" value={precioVenta} onChange={(e) => setPrecioVenta(e.target.value)} placeholder="Ej: 2800" />
+          <div className="small">Se ingresa en pesos, sin centavos.</div>
         </div>
       </div>
 
@@ -231,13 +276,12 @@ function CreateProductModal({ bases, onClose, onCreated }: { bases: ProductBase[
   )
 }
 
-
 function EditProductModal({ p, bases, onClose, onSaved }: { p: Product, bases: ProductBase[], onClose: () => void, onSaved: () => void }) {
   const [nombre, setNombre] = useState(p.nombre)
   const [categoria, setCategoria] = useState(p.categoria)
   const [tipo, setTipo] = useState(p.tipo)
   const [cantidadDescuento, setCantidadDescuento] = useState(String(p.cantidadDescuento))
-  const [precioVenta, setPrecioVenta] = useState(String(p.precioVenta))
+  const [precioVenta, setPrecioVenta] = useState(String(p.precioVenta)) // PESOS
   const [activo, setActivo] = useState(!!p.activo)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
@@ -245,12 +289,19 @@ function EditProductModal({ p, bases, onClose, onSaved }: { p: Product, bases: P
   const save = async () => {
     setSaving(true); setError('')
     try {
+      const pesosInt = parsePesosInput(precioVenta)
+      if (pesosInt === null || pesosInt < 0) {
+        setError('Precio inválido')
+        setSaving(false)
+        return
+      }
+
       await api.updateProduct(p.productId, {
         nombre: nombre.trim(),
         categoria,
         tipo,
         cantidadDescuento: Number(cantidadDescuento),
-        precioVenta: Number(precioVenta),
+        precioVenta: pesosInt, // PESOS
         activo,
       } as any)
       onSaved()
@@ -279,7 +330,7 @@ function EditProductModal({ p, bases, onClose, onSaved }: { p: Product, bases: P
           </div>
           <div className="col" style={{ gap: 6 }}>
             <label className="label">Tipo</label>
-            <select className="input" value={tipo} onChange={(e) => setTipo(e.target.value)}>
+            <select className="input" value={tipo} onChange={(e) => setTipo(e.target.value as any)}>
               <option value="GRANEL">GRANEL</option>
               <option value="MARCA">MARCA</option>
               <option value="COMBO">COMBO</option>
@@ -293,8 +344,9 @@ function EditProductModal({ p, bases, onClose, onSaved }: { p: Product, bases: P
             <input className="input" value={cantidadDescuento} onChange={(e) => setCantidadDescuento(e.target.value)} />
           </div>
           <div className="col" style={{ gap: 6 }}>
-            <label className="label">Precio venta (centavos)</label>
+            <label className="label">Precio venta ($)</label>
             <input className="input" value={precioVenta} onChange={(e) => setPrecioVenta(e.target.value)} />
+            <div className="small">Se ingresa en pesos, sin centavos.</div>
           </div>
         </div>
 
