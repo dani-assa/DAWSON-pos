@@ -34,7 +34,23 @@ export async function requireAuth(req, res, next) {
 export function requireRole(roleName) {
   return (req, res, next) => {
     if (!req.user) return res.status(401).json({ error: "unauthorized", message: "Token inválido o ausente" });
-    if (req.user.rol !== roleName) return res.status(403).json({ error: "forbidden", message: "No tiene permisos para esta acción" });
+    if (req.user.rol !== roleName) {
+      return res.status(403).json({ error: "forbidden", message: "No tiene permisos para esta acción" });
+    }
+    next();
+  };
+}
+
+/**
+ * Permite acceso si el usuario tiene cualquiera de los roles indicados.
+ * Uso: requireAnyRole("ADMIN","CAJERO")
+ */
+export function requireAnyRole(...roles) {
+  return (req, res, next) => {
+    if (!req.user) return res.status(401).json({ error: "unauthorized", message: "Token inválido o ausente" });
+    if (!roles.includes(req.user.rol)) {
+      return res.status(403).json({ error: "forbidden", message: "No tiene permisos para esta acción" });
+    }
     next();
   };
 }
